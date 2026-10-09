@@ -18,7 +18,7 @@ O site, a API e a versão web do telemóvel ficam no mesmo servidor
 ## 0. O que precisa ter à mão
 
 1. Painel Hostinger da VPS (Ubuntu 24 + Docker já instalados).
-2. Conta GitHub com este repositório (`Elton-Matsinhe/Sistema-de-Microcredito`).
+2. Conta GitHub com este repositório (`Antoniojoaozimila/projecto_microcredito`).
 3. Workbench, para exportar a base local.
 4. Duas senhas novas, **fortes e sem caracteres estranhos** (`@ # $ !` evitam
    problemas no Docker): senha do MySQL e um segredo JWT.
@@ -47,14 +47,16 @@ Vai enviá-lo para a VPS depois do primeiro deploy.
 Na pasta do projecto, no computador:
 
 ```powershell
-git add docker-compose.yml Caddyfile .env.example DEPLOY.md deploy .github
-git add backend/src/servidor.js backend/.env.example
-git add mobile/Dockerfile mobile/src/servicos/endereco.js mobile/vite.config.js
+git add docker-compose.yml docker-compose.yaml Caddyfile .env.example DEPLOY.md deploy
 git commit -m "Preparar deploy Docker Manager na Hostinger"
-git push -u origin versao-01
+git push -u origin main
+git branch master
+git push -u origin master
 ```
 
-Confirme no GitHub que `docker-compose.yml` está no repositório.
+Confirme no GitHub que `docker-compose.yaml` está na raiz, nas branches `main` e `master`.
+
+A Hostinger **não aceita** o link com `.git` no fim, nem o link `blob` da página do ficheiro.
 
 ### Se o repositório for privado
 
@@ -80,13 +82,21 @@ cat ~/.ssh/github-microcredito.pub
 2. Menu esquerdo → **Docker Manager**.
 3. **Compose**.
 4. **Compose from URL**.
-5. Cole **exactamente** este link (sem `/blob/`, sem o nome do ficheiro):
+5. Cole **exactamente** um destes links (sem `.git`, sem `/blob/`):
 
 ```
-https://github.com/Elton-Matsinhe/Sistema-de-Microcredito
+https://github.com/Antoniojoaozimila/projecto_microcredito
 ```
 
-O Docker Manager ignora o link `.../blob/versao-01/docker-compose.yml` (devolve a página HTML do GitHub, não o YAML). Como o repositório é **privado**, tem de existir primeiro a **Deploy key** do passo 2. A Hostinger procura `docker-compose.yaml` na branch `master`.
+Se o Docker Manager disser que o projecto não foi encontrado, use o ficheiro em bruto na branch `main`:
+
+```
+https://raw.githubusercontent.com/Antoniojoaozimila/projecto_microcredito/main/docker-compose.yaml
+```
+
+**Não use** `https://github.com/Antoniojoaozimila/projecto_microcredito.git` (o `.git` no fim falha). **Não use** o link da página do GitHub com `/blob/`.
+
+O repositório é **público**, por isso não precisa de Deploy key. A Hostinger, quando recebe só o endereço do repositório, procura `docker-compose.yaml` na branch `master`.
 
 6. Nome do projecto: `microcredito`.
 7. Em **Environment variables** cole (troque as senhas):
