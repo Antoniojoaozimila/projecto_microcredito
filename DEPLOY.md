@@ -82,38 +82,26 @@ cat ~/.ssh/github-microcredito.pub
 2. Menu esquerdo → **Docker Manager**.
 3. **Compose**.
 4. **Compose from URL**.
-5. Cole **exactamente** este link (ficheiro em bruto — o único formato que a Hostinger consegue ler):
+5. Cole **exactamente** este link (ficheiro em bruto na branch `main`, como no projecto que já funcionou):
 
 ```
-https://raw.githubusercontent.com/Antoniojoaozimila/projecto_microcredito/refs/heads/master/docker-compose.yml
+https://raw.githubusercontent.com/Antoniojoaozimila/projecto_microcredito/refs/heads/main/docker-compose.yml
 ```
 
-O exemplo cinzento `https://github.com/username/repo/docker-compose.yml` **não existe no GitHub** (dá 404) e causa `docker project not found`.
+O exemplo cinzento `https://github.com/username/repo/docker-compose.yml` **não existe no GitHub** (dá 404).
 
-**Não use:**
-- `https://github.com/Antoniojoaozimila/projecto_microcredito.git`
-- `https://github.com/Antoniojoaozimila/projecto_microcredito`
-- `https://github.com/Antoniojoaozimila/projecto_microcredito/docker-compose.yml`
-- qualquer link com `/blob/`
-
-Se o URL continuar a falhar, use **Compose manually** e cole o conteúdo de `docker-compose.yml`.
-
-6. Nome do projecto: `microcredito`.
+6. Nome do projecto: `microcredito` (só letras, números, hífen ou underscore).
 7. Em **Environment variables** cole (troque as senhas):
 
 ```
-DOMINIO=148-230-115-150.sslip.io
-IP_PUBLICO=148.230.115.150
-CADDY_EMAIL=o-seu-email@dominio.com
 DB_NOME=microcredito
-DB_UTILIZADOR=root
 DB_SENHA=troque-por-uma-senha-forte
 JWT_SEGREDO=troque-por-um-segredo-longo-e-aleatorio
 JWT_EXPIRA=12h
-CORS_ORIGENS=https://148-230-115-150.sslip.io,http://148.230.115.150
-SEMEAR_ADMIN_TESTE=false
+CORS_ORIGENS=http://148.230.115.150
+VITE_API_URL=http://148.230.115.150:3000
+EXPO_PUBLIC_API_URL=http://148.230.115.150:3000
 ADMIN_SENHA_INICIAL=troque-esta-senha
-EXPO_PUBLIC_API_URL=https://148-230-115-150.sslip.io
 ```
 
 8. **Deploy**. A primeira vez demora vários minutos: a VPS vai **compilar** o
