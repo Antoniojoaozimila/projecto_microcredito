@@ -82,21 +82,21 @@ cat ~/.ssh/github-microcredito.pub
 2. Menu esquerdo → **Docker Manager**.
 3. **Compose**.
 4. **Compose from URL**.
-5. Cole **exactamente** um destes links (sem `.git`, sem `/blob/`):
+5. Cole **exactamente** este link (ficheiro em bruto — o único formato que a Hostinger consegue ler):
 
 ```
-https://github.com/Antoniojoaozimila/projecto_microcredito
+https://raw.githubusercontent.com/Antoniojoaozimila/projecto_microcredito/refs/heads/master/docker-compose.yml
 ```
 
-Se o Docker Manager disser que o projecto não foi encontrado, use o ficheiro em bruto na branch `main`:
+O exemplo cinzento `https://github.com/username/repo/docker-compose.yml` **não existe no GitHub** (dá 404) e causa `docker project not found`.
 
-```
-https://raw.githubusercontent.com/Antoniojoaozimila/projecto_microcredito/main/docker-compose.yaml
-```
+**Não use:**
+- `https://github.com/Antoniojoaozimila/projecto_microcredito.git`
+- `https://github.com/Antoniojoaozimila/projecto_microcredito`
+- `https://github.com/Antoniojoaozimila/projecto_microcredito/docker-compose.yml`
+- qualquer link com `/blob/`
 
-**Não use** `https://github.com/Antoniojoaozimila/projecto_microcredito.git` (o `.git` no fim falha). **Não use** o link da página do GitHub com `/blob/`.
-
-O repositório é **público**, por isso não precisa de Deploy key. A Hostinger, quando recebe só o endereço do repositório, procura `docker-compose.yaml` na branch `master`.
+Se o URL continuar a falhar, use **Compose manually** e cole o conteúdo de `docker-compose.yml`.
 
 6. Nome do projecto: `microcredito`.
 7. Em **Environment variables** cole (troque as senhas):
