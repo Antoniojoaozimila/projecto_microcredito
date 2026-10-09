@@ -97,7 +97,7 @@ const ConfigUtilizadores = () => {
           <span className="cli-pill">{lista.length} conta{lista.length === 1 ? "" : "s"}</span>
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-io" onClick={() => navigate("/imperial/dashboard/settings")}>O meu perfil</button>
+          <button type="button" className="cli-btn-io" onClick={() => navigate("/microcredito/dashboard/settings")}>O meu perfil</button>
           <button type="button" className="cli-btn-novo" onClick={() => setForm(vazioUser())}><UserPlus size={16} /> Novo utilizador</button>
         </div>
       </header>

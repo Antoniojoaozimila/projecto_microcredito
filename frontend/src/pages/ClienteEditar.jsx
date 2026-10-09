@@ -31,7 +31,7 @@ export default function ClienteEditar() {
 
   useEffect(() => {
     if (usuario && !podeEditarSubscricao(usuario.tipo)) {
-      navigate("/imperial/dashboard/clientes", { replace: true });
+      navigate("/microcredito/dashboard/clientes", { replace: true });
     }
   }, [usuario, navigate]);
 
@@ -120,7 +120,7 @@ export default function ClienteEditar() {
       };
       await api.put(`/api/clientes/${form.id}`, payload);
       localStorage.removeItem(CACHE_CLIENTES);
-      navigate(`/imperial/dashboard/clientes/visualizar/${form.id}`, {
+      navigate(`/microcredito/dashboard/clientes/visualizar/${form.id}`, {
         replace: true,
       });
     } catch (err) {
@@ -147,7 +147,7 @@ export default function ClienteEditar() {
           <button
             type="button"
             className="cliente-detalhe-btn primary"
-            onClick={() => navigate("/imperial/dashboard/clientes")}
+            onClick={() => navigate("/microcredito/dashboard/clientes")}
           >
             <FaArrowLeft /> Voltar à lista
           </button>
@@ -166,7 +166,7 @@ export default function ClienteEditar() {
             type="button"
             className="cliente-detalhe-back"
             onClick={() =>
-              navigate(`/imperial/dashboard/clientes/visualizar/${id}`)
+              navigate(`/microcredito/dashboard/clientes/visualizar/${id}`)
             }
           >
             <FaArrowLeft /> Voltar
@@ -310,7 +310,7 @@ export default function ClienteEditar() {
             type="button"
             className="cliente-detalhe-btn secondary"
             onClick={() =>
-              navigate(`/imperial/dashboard/clientes/visualizar/${id}`)
+              navigate(`/microcredito/dashboard/clientes/visualizar/${id}`)
             }
           >
             <FaArrowLeft /> Cancelar

@@ -466,7 +466,7 @@ const RegistarPagamento = () => {
           ) : null}
 
           <div className="cli-actions">
-            <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/pagamentos")}><X size={16} /> Cancelar</button>
+            <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/pagamentos")}><X size={16} /> Cancelar</button>
             <button type="submit" className="cli-btn-novo" disabled={aGravar || !emprestimo}>
               {aGravar ? <Loader2 size={16} className="emp-girar" /> : <CheckCircle2 size={16} />} {aGravar ? "A registar..." : "Confirmar Pagamento"}
             </button>
@@ -589,8 +589,8 @@ const RegistarPagamento = () => {
               {[
                 { icon: Download, titulo: "Descarregar recibo", texto: "Guardar em PDF", accao: () => recibo(descarregarReciboPagamento), principal: true },
                 { icon: Printer, titulo: "Imprimir", texto: "Enviar para a impressora", accao: () => recibo(imprimirReciboPagamento) },
-                { icon: Eye, titulo: "Ver empréstimo", texto: "Abrir a ficha completa", accao: () => navigate(`/imperial/dashboard/emprestimos/${pag.loan_id}`) },
-                { icon: History, titulo: "Histórico", texto: "Lista de pagamentos", accao: () => navigate("/imperial/dashboard/pagamentos") },
+                { icon: Eye, titulo: "Ver empréstimo", texto: "Abrir a ficha completa", accao: () => navigate(`/microcredito/dashboard/emprestimos/${pag.loan_id}`) },
+                { icon: History, titulo: "Histórico", texto: "Lista de pagamentos", accao: () => navigate("/microcredito/dashboard/pagamentos") },
               ].map(({ icon: IconeAccao, titulo, texto, accao, principal }, indice) => (
                 <button
                   key={titulo}

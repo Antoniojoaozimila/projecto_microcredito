@@ -84,10 +84,10 @@ const EmprestimosLista = () => {
           <span className="cli-pill"><Layers size={16} /> {emprestimos.length} empréstimo{emprestimos.length === 1 ? "" : "s"}</span>
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-io" onClick={() => navigate("/imperial/dashboard/emprestimos/calendario")}>
+          <button type="button" className="cli-btn-io" onClick={() => navigate("/microcredito/dashboard/emprestimos/calendario")}>
             <CalendarDays size={16} /> Calendário
           </button>
-          <button type="button" className="cli-btn-novo" onClick={() => navigate("/imperial/dashboard/emprestimos/novo")}>
+          <button type="button" className="cli-btn-novo" onClick={() => navigate("/microcredito/dashboard/emprestimos/novo")}>
             <Plus size={16} /> Novo empréstimo
           </button>
         </div>
@@ -108,7 +108,7 @@ const EmprestimosLista = () => {
             <div className="cli-modal-accoes">
               <button type="button" className="cli-btn ghost" onClick={() => setAviso("")}>Continuar</button>
               {state?.id ? (
-                <button type="button" className="cli-btn" onClick={() => navigate(`/imperial/dashboard/emprestimos/${state.id}`)}><Eye size={16} /> Ver empréstimo</button>
+                <button type="button" className="cli-btn" onClick={() => navigate(`/microcredito/dashboard/emprestimos/${state.id}`)}><Eye size={16} /> Ver empréstimo</button>
               ) : null}
             </div>
           </div>
@@ -177,7 +177,7 @@ const EmprestimosLista = () => {
                 <td><span className={`emp-estado ${classeEstado(e.status)}`}>{e.status}</span></td>
                 <td>
                   <span className="emp-accoes-linha">
-                    <button type="button" className="cli-icon-btn" title="Detalhes" onClick={() => navigate(`/imperial/dashboard/emprestimos/${e.id}`)}><Eye size={15} /></button>
+                    <button type="button" className="cli-icon-btn" title="Detalhes" onClick={() => navigate(`/microcredito/dashboard/emprestimos/${e.id}`)}><Eye size={15} /></button>
                     <button type="button" className="cli-icon-btn cli-icon-perigo" title="Eliminar" onClick={() => setAEliminar(e)}><Trash2 size={15} /></button>
                   </span>
                 </td>

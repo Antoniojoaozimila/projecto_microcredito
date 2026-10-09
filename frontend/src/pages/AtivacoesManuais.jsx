@@ -27,7 +27,7 @@ import {
   FaUserShield,
 } from "react-icons/fa";
 import PageLoader from "../components/PageLoader/PageLoader";
-import ImperialSelect from "../components/ImperialSelect/ImperialSelect";
+import SistemaSelect from "../components/SistemaSelect/SistemaSelect";
 import api from "../services/api";
 import "./AtivacoesManuais.css";
 
@@ -60,7 +60,7 @@ const criarRecibo = async ({ seguro, pagamento, log }) => {
   doc.setFont("helvetica", "bold");
   doc.setTextColor(14, 77, 58);
   doc.setFontSize(20);
-  doc.text("IMPERIAL INSURANCE", 105, 24, { align: "center" });
+  doc.text("SISTEMA DE MICROCRÉDITO", 105, 24, { align: "center" });
   doc.setFontSize(15);
   doc.text("RECIBO DE PAGAMENTO MANUAL", 105, 35, { align: "center" });
 
@@ -389,7 +389,7 @@ const AtivacoesManuais = () => {
             </div>
             <div className="am-filter-group">
               <FaFilter />
-              <ImperialSelect
+              <SistemaSelect
                 aria-label="Filtrar estado do seguro"
                 value={filtroStatus}
                 onChange={(e) => setFiltroStatus(e.target.value)}
@@ -403,7 +403,7 @@ const AtivacoesManuais = () => {
             </div>
             <div className="am-filter-group">
               <FaCreditCard />
-              <ImperialSelect
+              <SistemaSelect
                 aria-label="Filtrar estado do pagamento"
                 value={filtroPagamento}
                 onChange={(e) => setFiltroPagamento(e.target.value)}

@@ -18,7 +18,7 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import PageLoader from "../components/PageLoader/PageLoader";
-import ImperialSelect from "../components/ImperialSelect/ImperialSelect";
+import SistemaSelect from "../components/SistemaSelect/SistemaSelect";
 import { AuthContext } from "../contexts/AuthContext";
 import { podeEditarSubscricao } from "../constants/tiposUsuario";
 import "./Clientes.css";
@@ -275,7 +275,7 @@ const Clientes = () => {
         <div className="clientes-filtros-avancados">
           <div className="clientes-filtro-group">
             <label>Seguro</label>
-            <ImperialSelect
+            <SistemaSelect
               value={filtrosAvancados.temSeguro}
               onChange={(e) => {
                 setFiltrosAvancados({ ...filtrosAvancados, temSeguro: e.target.value });
@@ -290,7 +290,7 @@ const Clientes = () => {
           </div>
           <div className="clientes-filtro-group">
             <label>Estado do seguro</label>
-            <ImperialSelect
+            <SistemaSelect
               value={filtrosAvancados.estado}
               onChange={(e) => {
                 setFiltrosAvancados({ ...filtrosAvancados, estado: e.target.value });
@@ -393,7 +393,7 @@ const Clientes = () => {
                           <div className="clientes-cell-actions">
                             <button
                               type="button"
-                              onClick={() => navigate(`/imperial/dashboard/clientes/visualizar/${cliente.id}`)}
+                              onClick={() => navigate(`/microcredito/dashboard/clientes/visualizar/${cliente.id}`)}
                               className="clientes-btn-view"
                               title="Visualizar"
                             >
@@ -402,7 +402,7 @@ const Clientes = () => {
                             {podeEditar && (
                               <button
                                 type="button"
-                                onClick={() => navigate(`/imperial/dashboard/clientes/editar/${cliente.id}`)}
+                                onClick={() => navigate(`/microcredito/dashboard/clientes/editar/${cliente.id}`)}
                                 className="clientes-btn-view clientes-btn-edit"
                                 title="Editar"
                               >

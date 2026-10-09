@@ -69,7 +69,7 @@ const GarantiasPenhoradas = () => {
           <span className="cli-pill"><ShieldAlert size={16} /> {elegiveis.length} elegíve{elegiveis.length === 1 ? "l" : "is"} para penhora</span>
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-novo" onClick={() => navigate("/imperial/dashboard/garantias/execucao")}><Gavel size={16} /> Execução de garantias</button>
+          <button type="button" className="cli-btn-novo" onClick={() => navigate("/microcredito/dashboard/garantias/execucao")}><Gavel size={16} /> Execução de garantias</button>
         </div>
       </header>
 
@@ -121,7 +121,7 @@ const GarantiasPenhoradas = () => {
                     <td><ChipData data={g.data_penhor} tom="is-vermelho" /></td>
                     <td>
                       <span className="pag-accoes">
-                        <button type="button" title="Ver garantia" onClick={() => navigate(`/imperial/dashboard/garantias/${g.id}`)}><Eye size={15} /></button>
+                        <button type="button" title="Ver garantia" onClick={() => navigate(`/microcredito/dashboard/garantias/${g.id}`)}><Eye size={15} /></button>
                         <button type="button" className="is-alerta" title="Notificar cliente" onClick={() => setAccao({ tipo: "notificar", garantia: g })}><BellRing size={15} /></button>
                         {podeLibertar(g, g.emprestimo) ? (
                           <button type="button" title="Libertar (cliente regularizou)" onClick={() => setAccao({ tipo: "libertar", garantia: g })}><LockOpen size={15} /></button>
@@ -164,7 +164,7 @@ const GarantiasPenhoradas = () => {
                   <td><DiasAtraso dias={g.dias_atraso} /></td>
                   <td>
                     <span className="pag-accoes">
-                      <button type="button" title="Ver empréstimo" onClick={() => navigate(`/imperial/dashboard/emprestimos/${g.loan_id}`)}><FileText size={15} /></button>
+                      <button type="button" title="Ver empréstimo" onClick={() => navigate(`/microcredito/dashboard/emprestimos/${g.loan_id}`)}><FileText size={15} /></button>
                       <button type="button" className="is-perigo" title="Penhorar garantia" onClick={() => setAccao({ tipo: "penhorar", garantia: g })}><Lock size={15} /></button>
                     </span>
                   </td>

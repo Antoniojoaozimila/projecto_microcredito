@@ -16,7 +16,7 @@ export default function PageLoader() {
     <div className="page-loader" role="status" aria-label="A carregar">
       <div className="page-loader-inner">
         <div className="page-loader-logo-wrap">
-          <img src={companyLogo} alt="Imperial Insurance" className="page-loader-logo" />
+          <img src={companyLogo} alt="Sistema de Microcrédito" className="page-loader-logo" />
           <div className="page-loader-ring" />
         </div>
         <p className="page-loader-text">A carregar{dots}</p>

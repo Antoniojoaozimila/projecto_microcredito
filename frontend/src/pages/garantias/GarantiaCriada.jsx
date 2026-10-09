@@ -35,7 +35,7 @@ const GarantiaCriada = () => {
     return (
       <div className="cli-page">
         <span className="cli-pill"><Shield size={16} /> Garantia não encontrada</span>
-        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/garantias")}><ArrowLeft size={16} /> Voltar à lista</button>
+        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/garantias")}><ArrowLeft size={16} /> Voltar à lista</button>
       </div>
     );
   }
@@ -61,9 +61,9 @@ const GarantiaCriada = () => {
   ].filter(Boolean);
 
   const accoes = [
-    { icon: Eye, titulo: "Ver garantia", texto: podeAprovar(usuario) && g.status === "Em Avaliação" ? "Analisar e aprovar" : "Abrir a ficha completa", accao: () => navigate(`/imperial/dashboard/garantias/${g.id}`), principal: true },
-    { icon: List, titulo: "Lista de garantias", texto: "Ver todas as garantias", accao: () => navigate("/imperial/dashboard/garantias") },
-    emprestimo ? { icon: FileText, titulo: "Ver empréstimo", texto: emprestimo.numero_contrato, accao: () => navigate(`/imperial/dashboard/emprestimos/${emprestimo.id}`) } : null,
+    { icon: Eye, titulo: "Ver garantia", texto: podeAprovar(usuario) && g.status === "Em Avaliação" ? "Analisar e aprovar" : "Abrir a ficha completa", accao: () => navigate(`/microcredito/dashboard/garantias/${g.id}`), principal: true },
+    { icon: List, titulo: "Lista de garantias", texto: "Ver todas as garantias", accao: () => navigate("/microcredito/dashboard/garantias") },
+    emprestimo ? { icon: FileText, titulo: "Ver empréstimo", texto: emprestimo.numero_contrato, accao: () => navigate(`/microcredito/dashboard/emprestimos/${emprestimo.id}`) } : null,
   ].filter(Boolean);
 
   return (
@@ -75,7 +75,7 @@ const GarantiaCriada = () => {
         </div>
         <div className="cli-top-actions">
           <button type="button" className="cli-btn-voltar" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Voltar</button>
-          <button type="button" className="cli-btn-novo" onClick={() => navigate("/imperial/dashboard/garantias/nova")}><ShieldPlus size={16} /> Registar outra garantia</button>
+          <button type="button" className="cli-btn-novo" onClick={() => navigate("/microcredito/dashboard/garantias/nova")}><ShieldPlus size={16} /> Registar outra garantia</button>
         </div>
       </header>
 
@@ -147,7 +147,7 @@ const GarantiaCriada = () => {
               <ChevronRight size={17} />
             </button>
           ))}
-          <button type="button" className="gar-adicionar gar-criada-outra" onClick={() => navigate("/imperial/dashboard/garantias/nova")}>
+          <button type="button" className="gar-adicionar gar-criada-outra" onClick={() => navigate("/microcredito/dashboard/garantias/nova")}>
             <ShieldPlus size={16} /> Registar outra garantia
           </button>
         </aside>

@@ -286,7 +286,7 @@ export default function Header() {
                   type="button"
                   className="header-profile-item"
                   style={{ animationDelay: "40ms" }}
-                  onClick={() => goTo("/imperial/dashboard/settings?tab=account")}
+                  onClick={() => goTo("/microcredito/dashboard/settings?tab=account")}
                 >
                   <span className="header-profile-item-icon">
                     <FiEdit3 />
@@ -301,7 +301,7 @@ export default function Header() {
                   type="button"
                   className="header-profile-item"
                   style={{ animationDelay: "95ms" }}
-                  onClick={() => goTo("/imperial/dashboard/settings")}
+                  onClick={() => goTo("/microcredito/dashboard/settings")}
                 >
                   <span className="header-profile-item-icon header-profile-item-icon--settings">
                     <FiSettings />

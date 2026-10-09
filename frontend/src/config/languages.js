@@ -1,6 +1,6 @@
 /** Idioma original da interface (não traduzir a origem). */
 export const PAGE_LANG = "pt";
-export const STORAGE_KEY = "imperial_lang";
+export const STORAGE_KEY = "microcredito_lang";
 
 export const LANGUAGES = [
   { code: "pt", label: "Português", country: "Moçambique", flag: "mz" },

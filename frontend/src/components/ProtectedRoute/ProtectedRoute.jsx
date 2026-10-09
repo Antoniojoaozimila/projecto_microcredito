@@ -14,14 +14,14 @@ const ProtectedRoute = ({
   }
 
   if (requireAdmin && usuario.tipo !== "admin") {
-    return <Navigate to="/imperial/dashboard/home" replace />;
+    return <Navigate to="/microcredito/dashboard/home" replace />;
   }
 
   if (
     Array.isArray(allowedRoles) &&
     !allowedRoles.includes(String(usuario.tipo || "").toLowerCase())
   ) {
-    return <Navigate to="/imperial/dashboard/home" replace />;
+    return <Navigate to="/microcredito/dashboard/home" replace />;
   }
 
   return children;

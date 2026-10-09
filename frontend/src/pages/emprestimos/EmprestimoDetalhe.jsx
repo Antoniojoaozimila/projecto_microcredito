@@ -39,7 +39,7 @@ const EmprestimoDetalhe = () => {
     return (
       <div className="cli-page">
         <span className="cli-pill"><FileText size={16} /> Empréstimo não encontrado</span>
-        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/emprestimos")}><ArrowLeft size={16} /> Voltar à lista</button>
+        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/emprestimos")}><ArrowLeft size={16} /> Voltar à lista</button>
       </div>
     );
   }
@@ -76,7 +76,7 @@ const EmprestimoDetalhe = () => {
           <span className={`emp-estado emp-estado-grande ${classeEstado(emprestimo.status)}`}>{emprestimo.status}</span>
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/emprestimos")}><ArrowLeft size={16} /> Voltar</button>
+          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/emprestimos")}><ArrowLeft size={16} /> Voltar</button>
           {emprestimo.status === "Pendente" ? (
             <>
               <button type="button" className="cli-btn-voltar emp-btn-rejeitar" onClick={() => executar(() => rejeitarEmprestimo(emprestimo.id, usuario), "Empréstimo rejeitado.")}><XCircle size={16} /> Rejeitar</button>
@@ -85,7 +85,7 @@ const EmprestimoDetalhe = () => {
             </>
           ) : null}
           {["Ativo", "Em Atraso", "Vencido"].includes(emprestimo.status) ? (
-            <button type="button" className="cli-btn-novo" onClick={() => navigate(`/imperial/dashboard/pagamentos/registar?emprestimo=${emprestimo.id}`)}><CreditCard size={16} /> Registar pagamento</button>
+            <button type="button" className="cli-btn-novo" onClick={() => navigate(`/microcredito/dashboard/pagamentos/registar?emprestimo=${emprestimo.id}`)}><CreditCard size={16} /> Registar pagamento</button>
           ) : null}
           <button type="button" className="cli-btn-io" onClick={() => descarregarRecibo(emprestimo, cliente, carteira)}><Receipt size={16} /> Recibo PDF</button>
           {emprestimo.data_aprovacao ? (
@@ -238,7 +238,7 @@ const EmprestimoDetalhe = () => {
                       <td>{g.tipo_garantia}{g.subtipo_garantia ? ` · ${g.subtipo_garantia}` : ""}</td>
                       <td>{formatarMT(valorGarantia(g))}</td>
                       <td><EstadoGarantia estado={g.status} /></td>
-                      <td><button type="button" className="cli-icon-btn" title="Ver garantia" onClick={() => navigate(`/imperial/dashboard/garantias/${g.id}`)}><Eye size={15} /></button></td>
+                      <td><button type="button" className="cli-icon-btn" title="Ver garantia" onClick={() => navigate(`/microcredito/dashboard/garantias/${g.id}`)}><Eye size={15} /></button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -246,7 +246,7 @@ const EmprestimoDetalhe = () => {
             </div>
           ) : <p className="cli-suave">Nenhuma garantia registada para este empréstimo.</p>}
           {["Pendente", "Ativo", "Em Atraso", "Vencido"].includes(emprestimo.status) ? (
-            <button type="button" className="gar-adicionar" onClick={() => navigate(`/imperial/dashboard/garantias/nova?emprestimo=${emprestimo.id}`)}><Plus size={16} /> Registar garantia</button>
+            <button type="button" className="gar-adicionar" onClick={() => navigate(`/microcredito/dashboard/garantias/nova?emprestimo=${emprestimo.id}`)}><Plus size={16} /> Registar garantia</button>
           ) : null}
         </section>
       ) : null}

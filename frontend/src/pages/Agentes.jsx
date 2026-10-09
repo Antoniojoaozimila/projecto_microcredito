@@ -227,7 +227,7 @@ const Agentes = () => {
           <button
             type="button"
             className="agentes-btn-criar"
-            onClick={() => navigate('/imperial/dashboard/agentes/criar')}
+            onClick={() => navigate('/microcredito/dashboard/agentes/criar')}
           >
             <FaPlus /> Criar Agente
           </button>
@@ -297,7 +297,7 @@ const Agentes = () => {
                         <button
                           type="button"
                           className="agentes-btn-view"
-                          onClick={() => navigate('/imperial/dashboard/agentes/visualizar/' + agente.id, { state: { agente } })}
+                          onClick={() => navigate('/microcredito/dashboard/agentes/visualizar/' + agente.id, { state: { agente } })}
                           title="Visualizar"
                         >
                           <FaEye /> Visualizar
@@ -307,7 +307,7 @@ const Agentes = () => {
                             <button
                               type="button"
                               className="agentes-btn-edit"
-                              onClick={() => navigate('/imperial/dashboard/agentes/editar/' + agente.id, { state: { agente } })}
+                              onClick={() => navigate('/microcredito/dashboard/agentes/editar/' + agente.id, { state: { agente } })}
                               title="Editar"
                             >
                               <FaEdit /> Editar

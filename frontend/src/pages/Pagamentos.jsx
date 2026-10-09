@@ -276,7 +276,7 @@ const Pagamentos = () => {
       y += 18;
       doc.setFontSize(14);
       doc.setTextColor(16, 106, 55);
-      doc.text("Relatório de Pagamentos - Imperial Insurance", pageW / 2, y, { align: "center" });
+      doc.text("Relatório de Pagamentos - Sistema de Microcrédito", pageW / 2, y, { align: "center" });
       y += 8;
       doc.setFontSize(9);
       doc.setTextColor(60, 60, 60);
@@ -567,7 +567,7 @@ const Pagamentos = () => {
                           type="button"
                           className="pagamentos-btn-view-icon"
                           title="Visualizar"
-                          onClick={() => navigate("/imperial/dashboard/pagamentos/visualizar/" + p.id, { state: { pagamento: p } })}
+                          onClick={() => navigate("/microcredito/dashboard/pagamentos/visualizar/" + p.id, { state: { pagamento: p } })}
                         >
                           <FaEye />
                         </button>

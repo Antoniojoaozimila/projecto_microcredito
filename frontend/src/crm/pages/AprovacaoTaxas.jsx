@@ -61,7 +61,7 @@ function AprovacaoTaxas() {
 
   useEffect(() => {
     if (!isAprovador) {
-      navigate("/imperial/dashboard/home");
+      navigate("/microcredito/dashboard/home");
       return;
     }
     carregar();

@@ -55,9 +55,9 @@ import companyLogo from "../../assets/logo.png";
 import { useMarca } from "../../services/marcaSistema";
 import "./Sidebar.css";
 
-const PATH_AGENTES = "/imperial/dashboard/agentes";
-const PATH_ATIVACOES = "/imperial/dashboard/ativacoes-manuais";
-const PATH_SUPERVISORES = "/imperial/dashboard/supervisores";
+const PATH_AGENTES = "/microcredito/dashboard/agentes";
+const PATH_ATIVACOES = "/microcredito/dashboard/ativacoes-manuais";
+const PATH_SUPERVISORES = "/microcredito/dashboard/supervisores";
 
 const MENU_ICONS = {
   dashboard: LayoutDashboard,

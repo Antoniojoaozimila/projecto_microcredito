@@ -22,7 +22,7 @@ export default function ViaturaEditar() {
 
   useEffect(() => {
     if (usuario && !podeEditarSubscricao(usuario.tipo)) {
-      navigate("/imperial/dashboard/clientes", { replace: true });
+      navigate("/microcredito/dashboard/clientes", { replace: true });
     }
   }, [usuario, navigate]);
 
@@ -99,7 +99,7 @@ export default function ViaturaEditar() {
 
   const voltar = () => {
     if (clienteIdVoltar) {
-      navigate(`/imperial/dashboard/clientes/visualizar/${clienteIdVoltar}`);
+      navigate(`/microcredito/dashboard/clientes/visualizar/${clienteIdVoltar}`);
     } else {
       navigate(-1);
     }

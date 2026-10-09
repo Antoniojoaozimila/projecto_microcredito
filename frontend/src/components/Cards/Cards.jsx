@@ -226,7 +226,7 @@ const Cards = () => {
       {/* Rodapé */}
       <footer className="dashboard-footer">
         <div className="footer-content">
-          <p>Imperial Insurance © {currentDateTime.getFullYear()} - Todos os direitos reservados_IMP-PLATAFORM | {currentDateTime.toLocaleDateString()} {currentDateTime.toLocaleTimeString()}</p>
+          <p>Sistema de Microcrédito © {currentDateTime.getFullYear()} - Todos os direitos reservados_IMP-PLATAFORM | {currentDateTime.toLocaleDateString()} {currentDateTime.toLocaleTimeString()}</p>
         </div>
       </footer>
     </div>

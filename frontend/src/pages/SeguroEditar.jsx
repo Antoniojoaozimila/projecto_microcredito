@@ -18,7 +18,7 @@ export default function SeguroEditar() {
 
   useEffect(() => {
     if (usuario && !podeEditarSubscricao(usuario.tipo)) {
-      navigate("/imperial/dashboard/seguros", { replace: true });
+      navigate("/microcredito/dashboard/seguros", { replace: true });
     }
   }, [usuario, navigate]);
 
@@ -86,7 +86,7 @@ export default function SeguroEditar() {
         premio_calculado:
           form.premio_calculado === "" ? undefined : form.premio_calculado,
       });
-      navigate(`/imperial/dashboard/seguros/visualizar/${id}`, { replace: true });
+      navigate(`/microcredito/dashboard/seguros/visualizar/${id}`, { replace: true });
     } catch (err) {
       setErro(
         err.response?.data?.mensagem || "Erro ao guardar. Tente novamente."
@@ -111,7 +111,7 @@ export default function SeguroEditar() {
           <button
             type="button"
             className="cliente-detalhe-btn primary"
-            onClick={() => navigate("/imperial/dashboard/seguros")}
+            onClick={() => navigate("/microcredito/dashboard/seguros")}
           >
             <FaArrowLeft /> Voltar
           </button>
@@ -129,7 +129,7 @@ export default function SeguroEditar() {
           <button
             type="button"
             className="cliente-detalhe-back"
-            onClick={() => navigate(`/imperial/dashboard/seguros/visualizar/${id}`)}
+            onClick={() => navigate(`/microcredito/dashboard/seguros/visualizar/${id}`)}
           >
             <FaArrowLeft /> Voltar
           </button>
@@ -229,7 +229,7 @@ export default function SeguroEditar() {
             type="button"
             className="cliente-detalhe-btn secondary"
             onClick={() =>
-              navigate(`/imperial/dashboard/seguros/visualizar/${id}`)
+              navigate(`/microcredito/dashboard/seguros/visualizar/${id}`)
             }
           >
             <FaArrowLeft /> Cancelar

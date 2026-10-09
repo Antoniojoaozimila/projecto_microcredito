@@ -24,7 +24,7 @@ const ClienteDetalhe = () => {
     return (
       <div className="cli-page">
         <span className="cli-pill"><User size={16} /> Cliente não encontrado</span>
-        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/clientes")}><ArrowLeft size={16} /> Voltar à lista</button>
+        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/clientes")}><ArrowLeft size={16} /> Voltar à lista</button>
       </div>
     );
   }
@@ -63,7 +63,7 @@ const ClienteDetalhe = () => {
         </div>
         <div className="cli-top-actions">
           <button type="button" className="cli-btn-voltar" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Voltar</button>
-          <Link className="cli-btn-novo" to={`/imperial/dashboard/clientes/editar/${cliente.id}`}><Pencil size={16} /> Editar</Link>
+          <Link className="cli-btn-novo" to={`/microcredito/dashboard/clientes/editar/${cliente.id}`}><Pencil size={16} /> Editar</Link>
         </div>
       </header>
       <section className="cli-section">

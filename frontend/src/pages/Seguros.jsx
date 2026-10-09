@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fa';
 import api from '../services/api';
 import PageLoader from '../components/PageLoader/PageLoader';
-import ImperialSelect from '../components/ImperialSelect/ImperialSelect';
+import SistemaSelect from '../components/SistemaSelect/SistemaSelect';
 import { AuthContext } from '../contexts/AuthContext';
 import { urlLogo } from '../services/logoDocumento';
 import "./Seguros.css";
@@ -633,7 +633,7 @@ const fetchSeguros = async (forcarAtualizacao = false) => {
         <div className="seguros-filtros-avancados">
           <div className="seguros-filtro-group">
             <label>Estado</label>
-            <ImperialSelect
+            <SistemaSelect
               value={filtrosAvancados.estado}
               onChange={(e) => {
                 setFiltrosAvancados({ ...filtrosAvancados, estado: e.target.value });
@@ -686,7 +686,7 @@ const fetchSeguros = async (forcarAtualizacao = false) => {
           </div>
           <div className="seguros-filtro-group">
             <label>Apólice Kit</label>
-            <ImperialSelect
+            <SistemaSelect
               value={filtrosAvancados.temKit}
               onChange={(e) => {
                 setFiltrosAvancados({ ...filtrosAvancados, temKit: e.target.value });
@@ -815,7 +815,7 @@ const fetchSeguros = async (forcarAtualizacao = false) => {
                         <button
                           type="button"
                           className="seguros-btn-view"
-                          onClick={() => navigate('/imperial/dashboard/seguros/visualizar/' + seguro.id, { state: { seguro } })}
+                          onClick={() => navigate('/microcredito/dashboard/seguros/visualizar/' + seguro.id, { state: { seguro } })}
                           title="Visualizar"
                         >
                           <FaEye /> Visualizar

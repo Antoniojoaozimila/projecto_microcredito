@@ -178,7 +178,7 @@ export default function SeguroVisualizar() {
                 type="button"
                 className="sv-btn sv-btn-primary"
                 onClick={() =>
-                  navigate(`/imperial/dashboard/seguros/editar/${id}`)
+                  navigate(`/microcredito/dashboard/seguros/editar/${id}`)
                 }
               >
                 <FaEdit /> Editar

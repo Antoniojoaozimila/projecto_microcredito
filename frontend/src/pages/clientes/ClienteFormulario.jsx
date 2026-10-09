@@ -268,7 +268,7 @@ const ClienteFormulario = () => {
       setAviso(erro.message || "Não foi possível gravar o cliente.");
       return;
     }
-    navigate("/imperial/dashboard/clientes", { state: { sucesso: id ? "Cliente actualizado com sucesso." : "Cliente criado com sucesso.", id: gravado.id } });
+    navigate("/microcredito/dashboard/clientes", { state: { sucesso: id ? "Cliente actualizado com sucesso." : "Cliente criado com sucesso.", id: gravado.id } });
   };
 
   return (
@@ -498,7 +498,7 @@ const ClienteFormulario = () => {
       </section>
 
       <div className="cli-actions">
-        <button type="button" className="cli-btn ghost" onClick={() => navigate("/imperial/dashboard/clientes")}><X size={16} /> Cancelar</button>
+        <button type="button" className="cli-btn ghost" onClick={() => navigate("/microcredito/dashboard/clientes")}><X size={16} /> Cancelar</button>
         <button type="submit" className="cli-btn"><Save size={16} /> Salvar cliente</button>
       </div>
       </div>

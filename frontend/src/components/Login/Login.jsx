@@ -129,7 +129,7 @@ const Login = () => {
 
   useEffect(() => {
     if (usuario) {
-      navigate("/imperial/dashboard/home", { replace: true });
+      navigate("/microcredito/dashboard/home", { replace: true });
     }
   }, [usuario, navigate]);
 

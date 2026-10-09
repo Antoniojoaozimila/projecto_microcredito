@@ -1,20 +1,13 @@
 {
-	email {$CADDY_EMAIL}
+	email admin@nbmm.tech
 }
 
-# Quem abrir pelo IP é enviado para o endereço com HTTPS (Let's Encrypt via sslip.io).
-http://{$IP_PUBLICO} {
-	redir https://{$DOMINIO}{uri} permanent
-}
+nbmm.tech, www.nbmm.tech {
+	encode gzip
 
-{$DOMINIO} {
-	encode gzip zstd
-
-	header {
-		X-Content-Type-Options nosniff
-		Referrer-Policy strict-origin-when-cross-origin
-		-Server
-	}
+	redir /imperial /microcredito permanent
+	@imperial path_regexp imperial ^/imperial(/.*)?$
+	redir @imperial /microcredito{re.imperial.1} permanent
 
 	handle /api* {
 		reverse_proxy backend:3000
@@ -24,11 +17,11 @@ http://{$IP_PUBLICO} {
 		reverse_proxy backend:3000
 	}
 
-	handle /m* {
-		reverse_proxy mobile:80
-	}
-
 	handle {
 		reverse_proxy frontend:80
 	}
+}
+
+http://148.230.115.150 {
+	redir https://nbmm.tech{uri} permanent
 }

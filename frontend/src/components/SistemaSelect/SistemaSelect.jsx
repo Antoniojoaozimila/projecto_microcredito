@@ -1,12 +1,12 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { FaChevronDown, FaCheck } from "react-icons/fa";
-import "./ImperialSelect.css";
+import "./SistemaSelect.css";
 
 /**
- * Select personalizado Imperial — sem hover azul nativo do browser.
+ * Select personalizado do sistema — sem hover azul nativo do browser.
  * API compatível com <select>: onChange({ target: { value } })
  */
-export default function ImperialSelect({
+export default function SistemaSelect({
   value = "",
   onChange,
   options = [],
@@ -60,13 +60,13 @@ export default function ImperialSelect({
   return (
     <div
       ref={rootRef}
-      className={`imperial-select ${open ? "is-open" : ""} ${
+      className={`sistema-select ${open ? "is-open" : ""} ${
         disabled ? "is-disabled" : ""
       } ${className}`.trim()}
     >
       <button
         type="button"
-        className="imperial-select-trigger"
+        className="sistema-select-trigger"
         disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -76,19 +76,19 @@ export default function ImperialSelect({
         onClick={() => !disabled && setOpen((v) => !v)}
       >
         <span
-          className={`imperial-select-value ${
+          className={`sistema-select-value ${
             selected ? "" : "is-placeholder"
           }`}
         >
           {displayLabel}
         </span>
-        <FaChevronDown className="imperial-select-chevron" />
+        <FaChevronDown className="sistema-select-chevron" />
       </button>
 
       {open && (
         <ul
           id={listId}
-          className="imperial-select-menu"
+          className="sistema-select-menu"
           role="listbox"
           aria-label={ariaLabel || placeholder}
         >
@@ -98,11 +98,11 @@ export default function ImperialSelect({
               <li key={`${opt.value}::${opt.label}`} role="option" aria-selected={isActive}>
                 <button
                   type="button"
-                  className={`imperial-select-option ${isActive ? "is-active" : ""}`}
+                  className={`sistema-select-option ${isActive ? "is-active" : ""}`}
                   onClick={() => emitChange(opt.value)}
                 >
                   <span>{opt.label}</span>
-                  {isActive && <FaCheck className="imperial-select-check" />}
+                  {isActive && <FaCheck className="sistema-select-check" />}
                 </button>
               </li>
             );

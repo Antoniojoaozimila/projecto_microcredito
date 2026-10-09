@@ -43,16 +43,14 @@ services:
       DB_SENHA: ${DB_SENHA:-root123}
       JWT_SEGREDO: ${JWT_SEGREDO:-microcredito-local-segredo-2026}
       JWT_EXPIRA: ${JWT_EXPIRA:-12h}
-      DOMINIO: ${DOMINIO:-148.230.115.150}
-      CORS_ORIGENS: ${CORS_ORIGENS:-http://148.230.115.150,http://localhost:5173}
+      DOMINIO: ${DOMINIO:-nbmm.tech}
+      CORS_ORIGENS: ${CORS_ORIGENS:-https://nbmm.tech,https://www.nbmm.tech,http://nbmm.tech,http://www.nbmm.tech,http://148.230.115.150}
       SEMEAR_ADMIN_TESTE: ${SEMEAR_ADMIN_TESTE:-false}
       ADMIN_SENHA_INICIAL: ${ADMIN_SENHA_INICIAL:-}
     command:
       - sh
       - -c
-      - apk add --no-cache git && git clone --depth 1 --branch main https://github.com/Antoniojoaozimila/projecto_microcredito.git /tmp/src && cp -a /tmp/src/backend/. /app/ && npm ci --omit=dev && node src/servidor.js
-    ports:
-      - "3000:3000"
+      - apk add --no-cache git && rm -rf /tmp/src && git clone --depth 1 --branch main https://github.com/Antoniojoaozimila/projecto_microcredito.git /tmp/src && cp -a /tmp/src/backend/. /app/ && npm ci --omit=dev && node src/servidor.js
     depends_on:
       mysql:
         condition: service_healthy
@@ -62,15 +60,31 @@ services:
     container_name: microcredito-frontend
     restart: unless-stopped
     environment:
-      VITE_API_URL: ${VITE_API_URL:-http://148.230.115.150:3000}
+      VITE_API_URL: ""
     command:
       - sh
       - -c
-      - apk add --no-cache git && rm -rf /src && git clone --depth 1 --branch main https://github.com/Antoniojoaozimila/projecto_microcredito.git /src && cd /src/frontend && npm ci && npm run build && npx --yes serve -s dist -l tcp://0.0.0.0:80
+      - apk add --no-cache git && rm -rf /src && git clone --depth 1 --branch main https://github.com/Antoniojoaozimila/projecto_microcredito.git /src && sed -i 's/person_two.jpg/person_two.JPG/' /src/frontend/src/utils/images.js && cd /src/frontend && npm ci && npm run build && npx --yes serve -s dist -l tcp://0.0.0.0:80
+    depends_on:
+      - backend
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: microcredito-caddy
+    restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
+      - frontend
       - backend
 
 volumes:
   mysql-data:
+  caddy_data:
+  caddy_config:

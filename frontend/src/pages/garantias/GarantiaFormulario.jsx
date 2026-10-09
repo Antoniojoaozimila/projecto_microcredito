@@ -143,7 +143,7 @@ const GarantiaFormulario = () => {
         ? await Promise.all(form.avalistas.map(async (a) => ({ ...a, documentos_anexos: await guardarLista(a.documentos_anexos) })))
         : [];
       const garantia = criarGarantia({ ...form, documentos_anexos: { titulo, factura, outros }, fotos_garantia: fotos, avalistas }, usuario);
-      navigate(`/imperial/dashboard/garantias/criada/${garantia.id}`);
+      navigate(`/microcredito/dashboard/garantias/criada/${garantia.id}`);
     } catch (erro) {
       setAviso(erro.message || "Não foi possível guardar a garantia.");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -406,7 +406,7 @@ const GarantiaFormulario = () => {
         </section>
 
         <div className="cli-actions">
-          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/garantias")}><X size={16} /> Cancelar</button>
+          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/garantias")}><X size={16} /> Cancelar</button>
           <button type="submit" className="cli-btn-novo" disabled={aGravar}>
             {aGravar ? <Loader2 size={16} className="emp-girar" /> : <Save size={16} />} {aGravar ? "A guardar..." : "Guardar garantia"}
           </button>

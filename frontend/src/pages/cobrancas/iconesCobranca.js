@@ -49,4 +49,4 @@ export const TOM_NOTIFICACAO = {
   Falhou: { icone: XCircle, tom: "is-vermelho" },
 };
 
-export const CAMINHO_COB = "/imperial/dashboard/modulo/cobrancas";
+export const CAMINHO_COB = "/microcredito/dashboard/modulo/cobrancas";

@@ -28,13 +28,13 @@ export default function Footer() {
           v{SISTEMA_VERSAO}
         </span>
         <nav className="footer-links" aria-label="Informação legal">
-          <Link to="/imperial/dashboard/privacidade" className="footer-link">
+          <Link to="/microcredito/dashboard/privacidade" className="footer-link">
             Privacidade
           </Link>
-          <Link to="/imperial/dashboard/termos-uso" className="footer-link">
+          <Link to="/microcredito/dashboard/termos-uso" className="footer-link">
             Uso
           </Link>
-          <Link to="/imperial/dashboard/cookies" className="footer-link">
+          <Link to="/microcredito/dashboard/cookies" className="footer-link">
             Cookies
           </Link>
         </nav>

@@ -75,7 +75,7 @@ function formatarAgenciaAgente(cotacao) {
 }
 
 /**
- * Gera HTML da cotação para PDF com template A4, logo Imperial, papel timbrado como marca de água.
+ * Gera HTML da cotação para PDF com template A4, logo do sistema, papel timbrado como marca de água.
  * @param {Object} cotacao - Dados da cotação (cliente, veiculos, totalPremio, etc.)
  * @param {string} origin - Origem da aplicação (ex: window.location.origin) para carregar logo e timbrado
  * @param {string} logoUrl - URL do logo (opcional)
@@ -250,7 +250,7 @@ export const gerarHTMLCotacaoPersonalizado = (
   const rodapeHtml = `
     <div class="rodape">
       <div class="rodape-sede">Av. Kenneth Kaunda, N°806 (Sede) | Maputo - Moçambique</div>
-      <div class="rodape-contacto">+258 21 610 110 | Nuit: 400626091 | info@imperialinsurance-mz.com</div>
+      <div class="rodape-contacto">+258 21 610 110 | Nuit: 400626091 | info@nbmm.tech</div>
       <div class="rodape-provincias">Matola: 86 988 4352 | Xai-Xai: 86 526 8473 | Maxixe: 876564719 | Manica: 879236595 | Tete: 87 735 1111 | Angónia: 870903788 | Zambézia: 868353277 | Nacala: 867452328 | Nampula: 866270729 | Niassa: 862251571 | Cabo Delgado: 871648028 / 878251111</div>
     </div>`;
 
@@ -572,7 +572,7 @@ export const gerarHTMLCotacaoPersonalizado = (
         <div><strong>Data:</strong> ${fmtData(new Date())}</div>
         <div style="margin-top: 30px; border-top: 1px solid #000; padding-top: 8px; width: 240px; margin-left: auto; text-align: center;">
           Assinado: ......................................................................<br>
-          <em>em nome da Companhia Imperial Seguros Moçambique, S.A.</em>
+          <em>em nome da Sistema de Microcrédito, S.A.</em>
         </div>
       </div>
     </div>
@@ -603,7 +603,7 @@ export const gerarHTMLCotacaoPersonalizado = (
         <div class="mt-10">2. A falta de pagamento do prémio da anuidade subsequente ou da primeira fracção deste impede a renovação do contrato; o não pagamento de qualquer fracção do prémio no decurso de uma anuidade determina a resolução automática e imediata do contrato, na data em que o pagamento dessa fracção é devido.</div>
       </div>
 
-      <div class="section-title">Dados Bancários – Imperial Insurance Moçambique, S.A.</div>
+      <div class="section-title">Dados Bancários – Sistema de Microcrédito, S.A.</div>
       <table class="tabela-bancos">
         <thead>
           <tr>
@@ -740,7 +740,7 @@ export const gerarHTMLCotacaoPersonalizado = (
         <p>O prémio total é devido e pagável antes ou na data do início ou renovação. A Seguradora não é obrigada a aceitar prémio endereçado após essa data. É dever do cliente divulgar todos os factores materiais antes do início e durante a apólice. A não divulgação ou má interpretação pode tornar a apólice nula desde o início.</p>
       </div>
 
-      <div class="text-center mt-20" style="font-size: 9pt; color: #6b7280;">www.imperialinsurance-mz.com</div>
+      <div class="text-center mt-20" style="font-size: 9pt; color: #6b7280;">www.nbmm.tech</div>
     </div>
     ${rodapeHtml}
     <div class="pagina-numero">Página 5 de 5</div>

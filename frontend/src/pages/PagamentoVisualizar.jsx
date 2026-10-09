@@ -139,7 +139,7 @@ export default function PagamentoVisualizar() {
       <div className="pagamento-visualizar-page">
         <div className="pv-erro">
           <p>Pagamento não encontrado.</p>
-          <button type="button" className="pv-back" onClick={() => navigate("/imperial/dashboard/pagamentos")}>
+          <button type="button" className="pv-back" onClick={() => navigate("/microcredito/dashboard/pagamentos")}>
             <FaArrowLeft /> Voltar
           </button>
         </div>
@@ -154,7 +154,7 @@ export default function PagamentoVisualizar() {
     <div className="pagamento-visualizar-page">
       <header className="pv-header">
         <div className="pv-header-top">
-          <button type="button" className="pv-back" onClick={() => navigate("/imperial/dashboard/pagamentos")}>
+          <button type="button" className="pv-back" onClick={() => navigate("/microcredito/dashboard/pagamentos")}>
             <FaArrowLeft /> Voltar
           </button>
           <h1 className="pv-title">

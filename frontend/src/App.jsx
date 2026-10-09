@@ -1,5 +1,5 @@
 // src/App.jsx
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
@@ -83,6 +83,12 @@ import {
   AprovacaoTaxas,
 } from "./crm";
 
+function RedirecionarRotaAntiga() {
+  const { pathname, search, hash } = useLocation();
+  const destino = pathname.replace(/^\/imperial(?=\/|$)/, "/microcredito") + search + hash;
+  return <Navigate to={destino || "/microcredito/login"} replace />;
+}
+
 function AppRoutes() {
   const { usuario, carregando } = useContext(AuthContext);
 
@@ -92,7 +98,7 @@ function AppRoutes() {
     <Routes>
       {usuario ? (
         <>
-          <Route path="/imperial/dashboard" element={<Dashboard />}>
+          <Route path="/microcredito/dashboard" element={<Dashboard />}>
             <Route path="home" element={<Home />} />
             <Route element={<CrmLayout />}>
               <Route path="cotacoes/criar" element={<CriarCotacao />} />
@@ -248,12 +254,13 @@ function AppRoutes() {
             <Route path="termos-uso" element={<TermosUso />} />
             <Route path="cookies" element={<Cookies />} />
           </Route>
-          <Route path="*" element={<Navigate to="/imperial/dashboard/home" replace />} />
+          <Route path="/imperial/*" element={<RedirecionarRotaAntiga />} />
+          <Route path="*" element={<Navigate to="/microcredito/dashboard/home" replace />} />
         </>
       ) : (
         <>
           <Route path="/microcredito/login" element={<Login />} />
-          <Route path="/imperial/login" element={<Navigate to="/microcredito/login" replace />} />
+          <Route path="/imperial/*" element={<RedirecionarRotaAntiga />} />
           <Route path="*" element={<Navigate to="/microcredito/login" replace />} />
         </>
       )}

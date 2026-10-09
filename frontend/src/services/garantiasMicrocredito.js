@@ -492,7 +492,7 @@ export const eliminarGarantia = (id) => {
 export const alertasGarantias = () => {
   const alertas = [];
   const garantias = garantiasDetalhadas();
-  const rota = (g) => `/imperial/dashboard/garantias/${g.id}`;
+  const rota = (g) => `/microcredito/dashboard/garantias/${g.id}`;
   garantias.forEach((g) => {
     const nome = g.cliente?.nome_completo || "Cliente";
     const contrato = g.emprestimo?.numero_contrato || "—";
@@ -504,14 +504,14 @@ export const alertasGarantias = () => {
           ...base, chave: `${g.id}-exec`, nivel: "critico", categoria: "Execução",
           titulo: r.notificado ? "Pronta para execução" : "Falta notificação formal",
           texto: `${g.codigo_garantia} · ${nome} · ${r.dias} dias de atraso (${contrato}).${r.notificado ? "" : " Notifique o cliente antes de executar."}`,
-          accao: { rotulo: r.notificado ? "Executar" : "Notificar", rota: "/imperial/dashboard/garantias/execucao" },
+          accao: { rotulo: r.notificado ? "Executar" : "Notificar", rota: "/microcredito/dashboard/garantias/execucao" },
         });
       } else if (r.dias >= REGRAS_GARANTIA.diasAvisoExecucao) {
         alertas.push({
           ...base, chave: `${g.id}-quase`, nivel: "alto", categoria: "Execução",
           titulo: `Execução em ${REGRAS_GARANTIA.diasExecucao - r.dias} dia(s)`,
           texto: `${g.codigo_garantia} · ${nome} · ${r.dias} dias de atraso.${r.notificado ? "" : " Prepare a notificação formal."}`,
-          accao: { rotulo: "Ver penhoradas", rota: "/imperial/dashboard/garantias/penhoradas" },
+          accao: { rotulo: "Ver penhoradas", rota: "/microcredito/dashboard/garantias/penhoradas" },
         });
       }
     }
@@ -520,7 +520,7 @@ export const alertasGarantias = () => {
         ...base, chave: `${g.id}-atraso`, nivel: "alto", categoria: "Atraso",
         titulo: "Empréstimo em atraso",
         texto: `${g.codigo_garantia} · ${nome} · ${g.dias_atraso} dia(s) de atraso em ${contrato}. Considere a penhora.`,
-        accao: { rotulo: "Penhorar", rota: "/imperial/dashboard/garantias/penhoradas" },
+        accao: { rotulo: "Penhorar", rota: "/microcredito/dashboard/garantias/penhoradas" },
       });
     }
     if (g.status === "Em Avaliação") {
@@ -575,7 +575,7 @@ export const alertasGarantias = () => {
         chave: `${e.id}-obrig`, nivel: e.status === "Pendente" ? "medio" : "alto", categoria: "Obrigatória",
         titulo: activasPorEmprestimo[e.id] ? "Garantia abaixo do valor do empréstimo" : "Empréstimo sem garantia obrigatória",
         texto: `${e.numero_contrato} · ${e.cliente?.nome_completo || "Cliente"} · ${formatarMT(e.valor_emprestado)} (acima de ${formatarMT(REGRAS_GARANTIA.obrigatoriaAcima)} exige garantia activa).`,
-        accao: { rotulo: "Nova garantia", rota: `/imperial/dashboard/garantias/nova?emprestimo=${e.id}` },
+        accao: { rotulo: "Nova garantia", rota: `/microcredito/dashboard/garantias/nova?emprestimo=${e.id}` },
       });
     });
   const ordem = { critico: 0, alto: 1, medio: 2, info: 3 };

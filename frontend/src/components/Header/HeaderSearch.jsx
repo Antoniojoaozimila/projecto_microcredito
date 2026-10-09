@@ -83,7 +83,7 @@ export default function HeaderSearch() {
             id: c.id,
             title: c.nome_completo || "Cliente",
             subtitle: c.documento_numero || c.telefone_principal || c.email || "",
-            path: `/imperial/dashboard/clientes/perfil/${c.id}`,
+            path: `/microcredito/dashboard/clientes/perfil/${c.id}`,
           }));
 
         const pagamentos = pagamentosRaw
@@ -101,7 +101,7 @@ export default function HeaderSearch() {
               id: p.id,
               title: cliente?.nome_completo || p.numero_recibo || "Pagamento",
               subtitle: [p.numero_recibo, p.valor_pago].filter((v) => v != null && v !== "").join(" · "),
-              path: `/imperial/dashboard/pagamentos/detalhe/${p.id}`,
+              path: `/microcredito/dashboard/pagamentos/detalhe/${p.id}`,
             };
           });
 

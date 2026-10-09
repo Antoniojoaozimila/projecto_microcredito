@@ -54,7 +54,7 @@ const GarantiaDetalhe = () => {
     return (
       <div className="cli-page">
         <span className="cli-pill"><Shield size={16} /> Garantia não encontrada</span>
-        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/garantias")}><ArrowLeft size={16} /> Voltar à lista</button>
+        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/garantias")}><ArrowLeft size={16} /> Voltar à lista</button>
       </div>
     );
   }
@@ -102,7 +102,7 @@ const GarantiaDetalhe = () => {
           <EstadoGarantia estado={g.status} grande />
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/garantias")}><ArrowLeft size={16} /> Voltar</button>
+          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/garantias")}><ArrowLeft size={16} /> Voltar</button>
           {botoes.map((b) => (
             <button
               key={`${b.id}-${b.rotulo}`}
@@ -192,7 +192,7 @@ const GarantiaDetalhe = () => {
                 <li><span><Shield size={15} /> Valor da garantia</span><strong>{formatarMT(valor)}</strong></li>
                 <li><span><Scale size={15} /> Cobertura</span><Cobertura valor={cobertura} /></li>
               </ul>
-              <button type="button" className="cli-btn-io gar-ver-emprestimo" onClick={() => navigate(`/imperial/dashboard/emprestimos/${e.id}`)}><FileText size={15} /> Ver empréstimo</button>
+              <button type="button" className="cli-btn-io gar-ver-emprestimo" onClick={() => navigate(`/microcredito/dashboard/emprestimos/${e.id}`)}><FileText size={15} /> Ver empréstimo</button>
             </>
           ) : <p className="cli-suave">Empréstimo removido.</p>}
         </section>
@@ -249,7 +249,7 @@ const GarantiaDetalhe = () => {
           onCancelar={() => setAEliminar(false)}
           onConfirmar={() => {
             eliminarGarantia(g.id);
-            navigate("/imperial/dashboard/garantias");
+            navigate("/microcredito/dashboard/garantias");
           }}
         />
       ) : null}

@@ -1,7 +1,7 @@
 /** Contas fictícias — usadas apenas em `npm run dev`. Não entram no build de produção. */
 export const DEMO_ADMIN = {
-  email: "admin@imperial.local",
-  senha: "Admin@Imperial2026",
+  email: "admin@microcredito.local",
+  senha: "Admin@Microcredito2026",
   nome: "Administrador Demo",
   tipo: "admin",
 };

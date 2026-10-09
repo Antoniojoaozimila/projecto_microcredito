@@ -279,7 +279,7 @@ export default function ClienteVisualizar() {
       <div className="cliente-detalhe-page">
         <div className="cliente-detalhe-erro">
           <p>{erro || "Cliente não encontrado."}</p>
-          <button type="button" className="cliente-detalhe-btn primary" onClick={() => navigate("/imperial/dashboard/clientes")}>
+          <button type="button" className="cliente-detalhe-btn primary" onClick={() => navigate("/microcredito/dashboard/clientes")}>
             <FaArrowLeft /> Voltar à lista
           </button>
         </div>
@@ -291,14 +291,14 @@ export default function ClienteVisualizar() {
     <div className="cliente-detalhe-page">
       <header className="cliente-detalhe-header">
         <div className="cliente-detalhe-header-top">
-          <button type="button" className="cliente-detalhe-back" onClick={() => navigate("/imperial/dashboard/clientes")}>
+          <button type="button" className="cliente-detalhe-back" onClick={() => navigate("/microcredito/dashboard/clientes")}>
             <FaArrowLeft /> Voltar
           </button>
           <h1 className="cliente-detalhe-title">
             <FaUser /> {cliente.nome}
           </h1>
           {podeEditar && (
-            <button type="button" className="cliente-detalhe-btn primary" onClick={() => navigate(`/imperial/dashboard/clientes/editar/${id}`)}>
+            <button type="button" className="cliente-detalhe-btn primary" onClick={() => navigate(`/microcredito/dashboard/clientes/editar/${id}`)}>
               <FaEdit /> Editar
             </button>
           )}
@@ -365,7 +365,7 @@ export default function ClienteVisualizar() {
                 className="cliente-detalhe-btn secondary"
                 style={{ marginLeft: "auto", fontSize: "0.85rem" }}
                 onClick={() =>
-                  navigate(`/imperial/dashboard/seguros/editar/${seguroInfo.id}`)
+                  navigate(`/microcredito/dashboard/seguros/editar/${seguroInfo.id}`)
                 }
               >
                 <FaEdit /> Editar seguro
@@ -482,7 +482,7 @@ export default function ClienteVisualizar() {
                           style={{ fontSize: "0.8rem", padding: "6px 10px" }}
                           onClick={() =>
                             navigate(
-                              `/imperial/dashboard/viaturas/editar/${v.id}?cliente=${id}`
+                              `/microcredito/dashboard/viaturas/editar/${v.id}?cliente=${id}`
                             )
                           }
                         >
@@ -685,11 +685,11 @@ export default function ClienteVisualizar() {
       )}
 
       <div className="cliente-detalhe-actions">
-        <button type="button" className="cliente-detalhe-btn secondary" onClick={() => navigate("/imperial/dashboard/clientes")}>
+        <button type="button" className="cliente-detalhe-btn secondary" onClick={() => navigate("/microcredito/dashboard/clientes")}>
           <FaArrowLeft /> Voltar à lista
         </button>
           {podeEditar && (
-            <button type="button" className="cliente-detalhe-btn primary" onClick={() => navigate(`/imperial/dashboard/clientes/editar/${id}`)}>
+            <button type="button" className="cliente-detalhe-btn primary" onClick={() => navigate(`/microcredito/dashboard/clientes/editar/${id}`)}>
               <FaEdit /> Editar cliente
             </button>
           )}

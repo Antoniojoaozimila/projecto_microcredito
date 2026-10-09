@@ -22,7 +22,7 @@ const EmprestimoCriado = () => {
     return (
       <div className="cli-page">
         <span className="cli-pill"><HandCoins size={16} /> Empréstimo não encontrado</span>
-        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/emprestimos")}><ArrowLeft size={16} /> Voltar à lista</button>
+        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/emprestimos")}><ArrowLeft size={16} /> Voltar à lista</button>
       </div>
     );
   }
@@ -57,8 +57,8 @@ const EmprestimoCriado = () => {
   const accoes = [
     { icon: Download, titulo: "Descarregar recibo", texto: "Guardar em PDF", accao: () => recibo(descarregarRecibo), principal: true },
     { icon: Printer, titulo: "Imprimir", texto: "Enviar para a impressora", accao: () => recibo(imprimirRecibo) },
-    { icon: Eye, titulo: "Ver empréstimo", texto: "Abrir a ficha completa", accao: () => navigate(`/imperial/dashboard/emprestimos/${emprestimo.id}`) },
-    { icon: List, titulo: "Listar empréstimos", texto: "Voltar à lista", accao: () => navigate("/imperial/dashboard/emprestimos") },
+    { icon: Eye, titulo: "Ver empréstimo", texto: "Abrir a ficha completa", accao: () => navigate(`/microcredito/dashboard/emprestimos/${emprestimo.id}`) },
+    { icon: List, titulo: "Listar empréstimos", texto: "Voltar à lista", accao: () => navigate("/microcredito/dashboard/emprestimos") },
   ];
 
   return (
@@ -70,7 +70,7 @@ const EmprestimoCriado = () => {
         </div>
         <div className="cli-top-actions">
           <button type="button" className="cli-btn-voltar" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Voltar</button>
-          <button type="button" className="cli-btn-novo" onClick={() => navigate("/imperial/dashboard/emprestimos/novo")}><HandCoins size={16} /> Criar outro empréstimo</button>
+          <button type="button" className="cli-btn-novo" onClick={() => navigate("/microcredito/dashboard/emprestimos/novo")}><HandCoins size={16} /> Criar outro empréstimo</button>
         </div>
       </header>
 
@@ -139,7 +139,7 @@ const EmprestimoCriado = () => {
               </button>
             ))}
           </div>
-          <button type="button" className="emp-recibo-novo" onClick={() => navigate("/imperial/dashboard/emprestimos/novo")}>
+          <button type="button" className="emp-recibo-novo" onClick={() => navigate("/microcredito/dashboard/emprestimos/novo")}>
             <span className="emp-recibo-novo-icone"><HandCoins size={16} /></span>
             Criar outro empréstimo
           </button>

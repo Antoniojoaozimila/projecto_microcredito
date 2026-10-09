@@ -106,7 +106,7 @@ export default function AgenteVisualizar() {
           <button
             type="button"
             className="av-btn av-btn-primary"
-            onClick={() => navigate("/imperial/dashboard/agentes")}
+            onClick={() => navigate("/microcredito/dashboard/agentes")}
           >
             <FaArrowLeft /> Voltar à lista
           </button>
@@ -125,7 +125,7 @@ export default function AgenteVisualizar() {
           <button
             type="button"
             className="av-btn av-btn-ghost"
-            onClick={() => navigate("/imperial/dashboard/agentes")}
+            onClick={() => navigate("/microcredito/dashboard/agentes")}
           >
             <FaArrowLeft /> Voltar
           </button>
@@ -134,7 +134,7 @@ export default function AgenteVisualizar() {
               type="button"
               className="av-btn av-btn-primary"
               onClick={() =>
-                navigate(`/imperial/dashboard/agentes/editar/${agente.id}`, {
+                navigate(`/microcredito/dashboard/agentes/editar/${agente.id}`, {
                   state: { agente },
                 })
               }
@@ -186,7 +186,7 @@ export default function AgenteVisualizar() {
         <button
           type="button"
           className="av-btn av-btn-ghost-dark"
-          onClick={() => navigate("/imperial/dashboard/agentes")}
+          onClick={() => navigate("/microcredito/dashboard/agentes")}
         >
           <FaArrowLeft /> Voltar à lista
         </button>
@@ -195,7 +195,7 @@ export default function AgenteVisualizar() {
             type="button"
             className="av-btn av-btn-solid"
             onClick={() =>
-              navigate(`/imperial/dashboard/agentes/editar/${agente.id}`, {
+              navigate(`/microcredito/dashboard/agentes/editar/${agente.id}`, {
                 state: { agente },
               })
             }

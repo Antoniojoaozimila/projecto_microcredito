@@ -121,7 +121,7 @@ const HistoricoPagamentos = () => {
           <span className="cli-pill"><Receipt size={16} /> {pagamentos.length} pagamento{pagamentos.length === 1 ? "" : "s"}</span>
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-novo" onClick={() => navigate("/imperial/dashboard/pagamentos/registar")}>
+          <button type="button" className="cli-btn-novo" onClick={() => navigate("/microcredito/dashboard/pagamentos/registar")}>
             <Plus size={16} /> Registar pagamento
           </button>
         </div>
@@ -193,7 +193,7 @@ const HistoricoPagamentos = () => {
                 <td><ChipEstadoPagamento estado={p.status} /></td>
                 <td>
                   <span className="pag-accoes">
-                    <button type="button" title="Ver detalhes" onClick={() => navigate(`/imperial/dashboard/pagamentos/detalhe/${p.id}`)}><Eye size={15} /></button>
+                    <button type="button" title="Ver detalhes" onClick={() => navigate(`/microcredito/dashboard/pagamentos/detalhe/${p.id}`)}><Eye size={15} /></button>
                     <button type="button" title="Descarregar recibo" onClick={() => recibo(p, descarregarReciboPagamento)}><Download size={15} /></button>
                     {podeEstornar(p) ? (
                       <button type="button" className="is-alerta" title="Estornar" onClick={() => setEstorno(p)}><RotateCcw size={15} /></button>

@@ -15,7 +15,7 @@ import {
   FaGasPump,
 } from "react-icons/fa";
 import PageLoader from "../components/PageLoader/PageLoader";
-import ImperialSelect from "../components/ImperialSelect/ImperialSelect";
+import SistemaSelect from "../components/SistemaSelect/SistemaSelect";
 import { TIPOS_USUARIO_OPTIONS } from "../constants/tiposUsuario";
 import api from "../services/api";
 import "./ClienteDetalhe.css";
@@ -144,7 +144,7 @@ export default function AgenteEditar() {
       try {
         localStorage.removeItem(CACHE_AGENTES);
       } catch (_) {}
-      navigate("/imperial/dashboard/agentes", { replace: true });
+      navigate("/microcredito/dashboard/agentes", { replace: true });
     } catch (err) {
       const msg = err.response?.data?.mensagem || err.response?.data?.message || "Erro ao guardar. Tente novamente.";
       setErro(msg);
@@ -168,7 +168,7 @@ export default function AgenteEditar() {
           <button
             type="button"
             className="cliente-detalhe-btn primary"
-            onClick={() => navigate("/imperial/dashboard/agentes")}
+            onClick={() => navigate("/microcredito/dashboard/agentes")}
           >
             <FaArrowLeft /> Voltar à lista
           </button>
@@ -185,7 +185,7 @@ export default function AgenteEditar() {
           <button
             type="button"
             className="cliente-detalhe-btn primary"
-            onClick={() => navigate("/imperial/dashboard/agentes")}
+            onClick={() => navigate("/microcredito/dashboard/agentes")}
           >
             <FaArrowLeft /> Voltar à lista
           </button>
@@ -201,7 +201,7 @@ export default function AgenteEditar() {
           <button
             type="button"
             className="cliente-detalhe-back"
-            onClick={() => navigate("/imperial/dashboard/agentes")}
+            onClick={() => navigate("/microcredito/dashboard/agentes")}
           >
             <FaArrowLeft /> Voltar
           </button>
@@ -274,7 +274,7 @@ export default function AgenteEditar() {
             </div>
             <div className="cliente-editar-field">
               <label><FaMapMarkerAlt /> Localização</label>
-              <ImperialSelect
+              <SistemaSelect
                 value={form.localizacao}
                 onChange={(e) => handleChange("localizacao", e.target.value)}
                 required
@@ -314,7 +314,7 @@ export default function AgenteEditar() {
             </div>
             <div className="cliente-editar-field">
               <label><FaUserShield /> Tipo de usuário</label>
-              <ImperialSelect
+              <SistemaSelect
                 value={form.tipo_usuario}
                 onChange={(e) => handleChange("tipo_usuario", e.target.value)}
                 options={TIPOS_USUARIO_OPTIONS}
@@ -350,7 +350,7 @@ export default function AgenteEditar() {
           <button
             type="button"
             className="cliente-detalhe-btn secondary"
-            onClick={() => navigate("/imperial/dashboard/agentes")}
+            onClick={() => navigate("/microcredito/dashboard/agentes")}
           >
             <FaArrowLeft /> Cancelar
           </button>

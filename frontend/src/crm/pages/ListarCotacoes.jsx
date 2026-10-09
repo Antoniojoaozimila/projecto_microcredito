@@ -201,7 +201,7 @@ function ListarCotacoes() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotação ${cotacao.id} - Imperial Seguros</title>
+    <title>Cotação ${cotacao.id} - Sistema de Microcrédito</title>
     <style>
         @page {
             size: A4;
@@ -395,7 +395,7 @@ function ListarCotacoes() {
     <!-- PÁGINA 1 -->
     <div class="page">
         <div class="logo">
-            <div class="logo-text">IMPERIAL SEGUROS</div>
+            <div class="logo-text">SISTEMA DE MICROCRÉDITO</div>
             <div class="logo-subtitle">Moçambique, S.A.</div>
         </div>
         
@@ -462,7 +462,7 @@ function ListarCotacoes() {
     <!-- PÁGINA 2 -->
     <div class="page">
         <div class="logo">
-            <div class="logo-text">IMPERIAL SEGUROS</div>
+            <div class="logo-text">SISTEMA DE MICROCRÉDITO</div>
         </div>
         
         <div class="header">
@@ -548,7 +548,7 @@ function ListarCotacoes() {
         </div>
         
         <div class="mt-20">
-            <div class="bold">Bank Details Imperial Insurance Moçambique, S.A.</div>
+            <div class="bold">Bank Details Sistema de Microcrédito, S.A.</div>
             <table class="tabela-bancos">
                 <thead>
                     <tr>
@@ -599,7 +599,7 @@ function ListarCotacoes() {
     <!-- PÁGINA 3 -->
     <div class="page">
         <div class="logo">
-            <div class="logo-text">IMPERIAL SEGUROS</div>
+            <div class="logo-text">SISTEMA DE MICROCRÉDITO</div>
         </div>
         
         <div class="header">
@@ -699,7 +699,7 @@ function ListarCotacoes() {
     <!-- PÁGINA 4 -->
     <div class="page">
         <div class="logo">
-            <div class="logo-text">IMPERIAL SEGUROS</div>
+            <div class="logo-text">SISTEMA DE MICROCRÉDITO</div>
         </div>
         
         <div class="condicoes">
@@ -748,7 +748,7 @@ function ListarCotacoes() {
     <!-- PÁGINA 5 -->
     <div class="page">
         <div class="logo">
-            <div class="logo-text">IMPERIAL SEGUROS</div>
+            <div class="logo-text">SISTEMA DE MICROCRÉDITO</div>
         </div>
         
         <div class="condicoes">
@@ -807,7 +807,7 @@ function ListarCotacoes() {
         </div>
         
         <div class="text-center mt-20" style="font-size: 9px; color: #666;">
-            www.imperialseguros.co.mz
+            www.nbmm.tech
         </div>
         
         <div class="pagina-numero">Página 5 de 5</div>

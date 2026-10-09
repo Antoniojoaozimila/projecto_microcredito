@@ -350,7 +350,7 @@ const ClientesLista = () => {
               e.target.value = "";
             }}
           />
-          <button type="button" className="cli-btn-novo" onClick={() => navigate("/imperial/dashboard/clientes/novo")}>
+          <button type="button" className="cli-btn-novo" onClick={() => navigate("/microcredito/dashboard/clientes/novo")}>
             <Plus size={16} /> Novo cliente
           </button>
         </div>
@@ -478,8 +478,8 @@ const ClientesLista = () => {
                   </span>
                 </td>
                 <td>
-                  <button type="button" className="cli-icon-btn" title="Detalhes" onClick={() => navigate(`/imperial/dashboard/clientes/perfil/${c.id}`)}><Eye size={15} /></button>
-                  <button type="button" className="cli-icon-btn" title="Editar" onClick={() => navigate(`/imperial/dashboard/clientes/editar/${c.id}`)}><Pencil size={15} /></button>
+                  <button type="button" className="cli-icon-btn" title="Detalhes" onClick={() => navigate(`/microcredito/dashboard/clientes/perfil/${c.id}`)}><Eye size={15} /></button>
+                  <button type="button" className="cli-icon-btn" title="Editar" onClick={() => navigate(`/microcredito/dashboard/clientes/editar/${c.id}`)}><Pencil size={15} /></button>
                   <button type="button" className="cli-icon-btn cli-icon-perigo" title="Eliminar" onClick={() => setAEliminar(c)}><Trash2 size={15} /></button>
                 </td>
               </tr>

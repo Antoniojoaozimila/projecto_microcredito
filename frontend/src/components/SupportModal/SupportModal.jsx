@@ -5,7 +5,7 @@ import { FaTimes, FaWhatsapp, FaSms, FaPhone } from "react-icons/fa";
 import { DESENVOLVEDORES } from "../../constants/suporteDesenvolvedores";
 import "./SupportModal.css";
 
-const MSG_SUPORTE = "Olá, preciso de suporte no sistema Imperial Insurance.";
+const MSG_SUPORTE = "Olá, preciso de suporte no sistema Sistema de Microcrédito.";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -153,7 +153,7 @@ const SupportModal = ({ open, onClose }) => {
             </div>
 
             <footer className="support-modal-footer">
-              Imperial Insurance · Suporte técnico da plataforma
+              Sistema de Microcrédito · Suporte técnico da plataforma
             </footer>
           </motion.div>
         </motion.div>

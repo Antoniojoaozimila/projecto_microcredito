@@ -43,7 +43,7 @@ const PagamentoDetalhe = () => {
     return (
       <div className="cli-page">
         <span className="cli-pill"><Receipt size={16} /> Pagamento não encontrado</span>
-        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/pagamentos")}><ArrowLeft size={16} /> Voltar ao histórico</button>
+        <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/pagamentos")}><ArrowLeft size={16} /> Voltar ao histórico</button>
       </div>
     );
   }
@@ -78,8 +78,8 @@ const PagamentoDetalhe = () => {
           <ChipEstadoPagamento estado={pagamento.status} grande />
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/pagamentos")}><ArrowLeft size={16} /> Voltar</button>
-          <button type="button" className="cli-btn-io" onClick={() => navigate(`/imperial/dashboard/emprestimos/${pagamento.loan_id}`)}><FileText size={16} /> Ver empréstimo</button>
+          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/pagamentos")}><ArrowLeft size={16} /> Voltar</button>
+          <button type="button" className="cli-btn-io" onClick={() => navigate(`/microcredito/dashboard/emprestimos/${pagamento.loan_id}`)}><FileText size={16} /> Ver empréstimo</button>
           <button type="button" className="cli-btn-io" onClick={() => recibo(imprimirReciboPagamento)}><Printer size={16} /> Imprimir</button>
           <button type="button" className="cli-btn-novo" onClick={() => recibo(descarregarReciboPagamento)}><Download size={16} /> Recibo PDF</button>
           {podeEstornar(pagamento) ? (
@@ -218,7 +218,7 @@ const PagamentoDetalhe = () => {
           onCancelar={() => setAEliminar(false)}
           onConfirmar={() => {
             eliminarPagamento(pagamento.id, usuario);
-            navigate("/imperial/dashboard/pagamentos");
+            navigate("/microcredito/dashboard/pagamentos");
           }}
         />
       ) : null}

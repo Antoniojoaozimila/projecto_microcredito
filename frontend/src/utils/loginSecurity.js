@@ -1,6 +1,6 @@
 import { lerConfig } from "../services/configuracoesMicrocredito";
 
-const GUARD_KEY = "imperial-login-guard";
+const GUARD_KEY = "microcredito-login-guard";
 const EMAIL_MAX = 254;
 const NAME_MAX = 120;
 const PASSWORD_MAX = 128;

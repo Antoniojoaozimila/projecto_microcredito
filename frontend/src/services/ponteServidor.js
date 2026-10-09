@@ -12,7 +12,7 @@ const original = {
   key: localStorage.key.bind(localStorage),
 };
 
-const MANTER = new Set(["token", "userProfile", "imperial_lang", "microcredito-remember-email"]);
+const MANTER = new Set(["token", "userProfile", "microcredito_lang", "microcredito-remember-email"]);
 const LOCAIS = new Set(["microcredito-remember-email", "microcredito-senhas-locais"]);
 const eColecao = (chave) => String(chave || "").startsWith("microcredito-") && !LOCAIS.has(chave);
 

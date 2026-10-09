@@ -1,10 +1,10 @@
 import { personsImgs } from "../utils/images";
 
-const modulo = (area, pagina) => `/imperial/dashboard/modulo/${area}/${pagina}`;
+const modulo = (area, pagina) => `/microcredito/dashboard/modulo/${area}/${pagina}`;
 
 export const navigationLinks = [
   { id: 'div-painel', type: 'divider', title: 'Painel' },
-  { id: 'dashboard', title: 'Dashboard', icon: 'dashboard', path: '/imperial/dashboard/home' },
+  { id: 'dashboard', title: 'Dashboard', icon: 'dashboard', path: '/microcredito/dashboard/home' },
 
   { id: 'div-credito', type: 'divider', title: 'Clientes e crédito' },
   {
@@ -13,9 +13,9 @@ export const navigationLinks = [
     icon: 'clientes',
     type: 'submenu',
     children: [
-      { id: 'cli-lista', title: 'Listar Clientes', icon: 'lista', path: '/imperial/dashboard/clientes' },
-      { id: 'cli-novo', title: 'Novo cliente', icon: 'novo-cliente', path: '/imperial/dashboard/clientes/novo' },
-      { id: 'cli-mapa', title: 'Mapa de clientes', icon: 'mapa', path: '/imperial/dashboard/clientes/mapa' },
+      { id: 'cli-lista', title: 'Listar Clientes', icon: 'lista', path: '/microcredito/dashboard/clientes' },
+      { id: 'cli-novo', title: 'Novo cliente', icon: 'novo-cliente', path: '/microcredito/dashboard/clientes/novo' },
+      { id: 'cli-mapa', title: 'Mapa de clientes', icon: 'mapa', path: '/microcredito/dashboard/clientes/mapa' },
     ],
   },
   {
@@ -24,9 +24,9 @@ export const navigationLinks = [
     icon: 'emprestimos',
     type: 'submenu',
     children: [
-      { id: 'emp-novo', title: 'Novo Empréstimo', icon: 'novo-emprestimo', path: '/imperial/dashboard/emprestimos/novo' },
-      { id: 'emp-lista', title: 'Listar Empréstimos', icon: 'lista', path: '/imperial/dashboard/emprestimos' },
-      { id: 'emp-calendario', title: 'Calendário', icon: 'calendario', path: '/imperial/dashboard/emprestimos/calendario' },
+      { id: 'emp-novo', title: 'Novo Empréstimo', icon: 'novo-emprestimo', path: '/microcredito/dashboard/emprestimos/novo' },
+      { id: 'emp-lista', title: 'Listar Empréstimos', icon: 'lista', path: '/microcredito/dashboard/emprestimos' },
+      { id: 'emp-calendario', title: 'Calendário', icon: 'calendario', path: '/microcredito/dashboard/emprestimos/calendario' },
     ],
   },
 
@@ -37,8 +37,8 @@ export const navigationLinks = [
     icon: 'pagamentos',
     type: 'submenu',
     children: [
-      { id: 'pag-registar', title: 'Registar Pagamento', icon: 'registar', path: '/imperial/dashboard/pagamentos/registar' },
-      { id: 'pag-historico', title: 'Histórico de Pagamentos', icon: 'historico', path: '/imperial/dashboard/pagamentos' },
+      { id: 'pag-registar', title: 'Registar Pagamento', icon: 'registar', path: '/microcredito/dashboard/pagamentos/registar' },
+      { id: 'pag-historico', title: 'Histórico de Pagamentos', icon: 'historico', path: '/microcredito/dashboard/pagamentos' },
     ],
   },
   {
@@ -47,11 +47,11 @@ export const navigationLinks = [
     icon: 'garantias',
     type: 'submenu',
     children: [
-      { id: 'gar-nova', title: 'Nova Garantia', icon: 'nova-garantia', path: '/imperial/dashboard/garantias/nova' },
-      { id: 'gar-lista', title: 'Lista de Garantias', icon: 'lista', path: '/imperial/dashboard/garantias' },
-      { id: 'gar-penhoradas', title: 'Garantias penhoradas', icon: 'penhoradas', path: '/imperial/dashboard/garantias/penhoradas' },
-      { id: 'gar-execucao', title: 'Execução de garantias', icon: 'execucao', path: '/imperial/dashboard/garantias/execucao' },
-      { id: 'gar-alertas', title: 'Alertas de garantias', icon: 'alertas', path: '/imperial/dashboard/garantias/alertas' },
+      { id: 'gar-nova', title: 'Nova Garantia', icon: 'nova-garantia', path: '/microcredito/dashboard/garantias/nova' },
+      { id: 'gar-lista', title: 'Lista de Garantias', icon: 'lista', path: '/microcredito/dashboard/garantias' },
+      { id: 'gar-penhoradas', title: 'Garantias penhoradas', icon: 'penhoradas', path: '/microcredito/dashboard/garantias/penhoradas' },
+      { id: 'gar-execucao', title: 'Execução de garantias', icon: 'execucao', path: '/microcredito/dashboard/garantias/execucao' },
+      { id: 'gar-alertas', title: 'Alertas de garantias', icon: 'alertas', path: '/microcredito/dashboard/garantias/alertas' },
     ],
   },
   {
@@ -86,7 +86,7 @@ export const navigationLinks = [
     icon: 'relatorios',
     type: 'submenu',
     children: [
-      { id: 'rel-financeiro', title: 'Relatório financeiro', icon: 'rel-financeiro', path: '/imperial/dashboard/relatorios' },
+      { id: 'rel-financeiro', title: 'Relatório financeiro', icon: 'rel-financeiro', path: '/microcredito/dashboard/relatorios' },
       { id: 'rel-inadimplencia', title: 'Relatório de inadimplência', icon: 'inadimplencia', path: modulo('relatorios', 'inadimplencia') },
       { id: 'rel-performance', title: 'Relatório de performance', icon: 'performance', path: modulo('relatorios', 'performance') },
       { id: 'rel-clientes', title: 'Relatório de clientes', icon: 'rel-clientes', path: modulo('relatorios', 'clientes') },

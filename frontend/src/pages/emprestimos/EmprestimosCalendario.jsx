@@ -231,7 +231,7 @@ const EmprestimosCalendario = () => {
                   type="button"
                   className={`emp-agenda-item is-${p.estado}`}
                   style={{ animationDelay: `${indice * 70}ms` }}
-                  onClick={() => navigate(`/imperial/dashboard/emprestimos/${p.emprestimoId}`)}
+                  onClick={() => navigate(`/microcredito/dashboard/emprestimos/${p.emprestimoId}`)}
                 >
                   <span className="emp-agenda-item-faixa" />
                   <div className="emp-agenda-item-topo">

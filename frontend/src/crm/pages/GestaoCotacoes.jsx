@@ -85,7 +85,7 @@ function GestaoCotacoes() {
           data: cotacao.data_criacao,
           status: cotacao.status,
           agente: cotacao.agente_nome || 'N/A',
-          seguradora: 'Imperial Seguros',
+          seguradora: 'Sistema de Microcrédito',
           vencimento: cotacao.data_validade,
           progresso: calcularProgresso(cotacao.status),
           ultimaAtualizacao: cotacao.data_atualizacao || cotacao.data_criacao
@@ -123,7 +123,7 @@ function GestaoCotacoes() {
       data: '2024-01-15',
       status: 'ativa',
       agente: 'Maria Silva',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2024-07-15',
       progresso: 75,
       ultimaAtualizacao: '2024-01-20'
@@ -136,7 +136,7 @@ function GestaoCotacoes() {
       data: '2024-01-10',
       status: 'pendente',
       agente: 'Pedro Lima',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2024-04-10',
       progresso: 45,
       ultimaAtualizacao: '2024-01-18'
@@ -149,7 +149,7 @@ function GestaoCotacoes() {
       data: '2024-01-05',
       status: 'aprovada',
       agente: 'Ana Costa',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2025-01-05',
       progresso: 100,
       ultimaAtualizacao: '2024-01-19'
@@ -162,7 +162,7 @@ function GestaoCotacoes() {
       data: '2024-01-12',
       status: 'expirada',
       agente: 'João Santos',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2024-02-12',
       progresso: 30,
       ultimaAtualizacao: '2024-01-17'
@@ -175,7 +175,7 @@ function GestaoCotacoes() {
       data: '2024-01-08',
       status: 'ativa',
       agente: 'Carla Mondlane',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2025-01-08',
       progresso: 60,
       ultimaAtualizacao: '2024-01-21'
@@ -188,7 +188,7 @@ function GestaoCotacoes() {
       data: '2024-01-22',
       status: 'pendente',
       agente: 'Luís Santos',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2024-04-22',
       progresso: 20,
       ultimaAtualizacao: '2024-01-25'
@@ -201,7 +201,7 @@ function GestaoCotacoes() {
       data: '2024-01-18',
       status: 'aprovada',
       agente: 'Pedro Lima',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2025-01-18',
       progresso: 100,
       ultimaAtualizacao: '2024-01-23'
@@ -214,7 +214,7 @@ function GestaoCotacoes() {
       data: '2024-01-14',
       status: 'ativa',
       agente: 'Carla Mondlane',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2025-01-14',
       progresso: 85,
       ultimaAtualizacao: '2024-01-24'
@@ -227,7 +227,7 @@ function GestaoCotacoes() {
       data: '2024-01-20',
       status: 'pendente',
       agente: 'Ana Costa',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2024-04-20',
       progresso: 40,
       ultimaAtualizacao: '2024-01-26'
@@ -240,7 +240,7 @@ function GestaoCotacoes() {
       data: '2024-01-16',
       status: 'expirada',
       agente: 'Maria Silva',
-      seguradora: 'Imperial Seguros',
+      seguradora: 'Sistema de Microcrédito',
       vencimento: '2024-02-16',
       progresso: 15,
       ultimaAtualizacao: '2024-01-27'

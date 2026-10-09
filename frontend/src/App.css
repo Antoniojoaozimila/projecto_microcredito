@@ -69,9 +69,9 @@ button {
   cursor: pointer;
 }
 
-/* ================= SELECTS / MENUS SUSPENSOS (tema Imperial) ================= */
+/* ================= SELECTS / MENUS SUSPENSOS (tema do sistema) ================= */
 select,
-.imperial-select,
+.sistema-select,
 .geo-filters select,
 .clientes-filtro-group select,
 .seguros-filtro-group select,
@@ -106,7 +106,7 @@ select,
 }
 
 select:hover,
-.imperial-select:hover,
+.sistema-select:hover,
 .geo-filters select:hover,
 .clientes-filtro-group select:hover,
 .seguros-filtro-group select:hover,
@@ -120,7 +120,7 @@ select:hover,
 }
 
 select:focus,
-.imperial-select:focus,
+.sistema-select:focus,
 .geo-filters select:focus,
 .clientes-filtro-group select:focus,
 .seguros-filtro-group select:focus,
@@ -134,7 +134,7 @@ select:focus,
 }
 
 select option,
-.imperial-select option {
+.sistema-select option {
   color: #0e4d3a;
   background: #fff;
   padding: 10px;
@@ -142,8 +142,8 @@ select option,
 
 select option:checked,
 select option:hover,
-.imperial-select option:checked,
-.imperial-select option:hover {
+.sistema-select option:checked,
+.sistema-select option:hover {
   background: linear-gradient(#106a37, #106a37) !important;
   background-color: #106a37 !important;
   color: #fff !important;

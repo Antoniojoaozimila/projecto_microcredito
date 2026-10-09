@@ -146,7 +146,7 @@ const EmprestimoFormulario = () => {
     try {
       const garantia_documentos = comGarantia ? await guardarLista(form.garantia_documentos) : [];
       const novo = criarEmprestimo({ ...form, garantia_documentos }, usuario);
-      navigate(`/imperial/dashboard/emprestimos/criado/${novo.id}`);
+      navigate(`/microcredito/dashboard/emprestimos/criado/${novo.id}`);
     } catch (erro) {
       setAviso(erro.message || "Não foi possível criar o empréstimo.");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -377,7 +377,7 @@ const EmprestimoFormulario = () => {
         </> : null}
 
         <div className="cli-actions">
-          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/imperial/dashboard/emprestimos")}><X size={16} /> Cancelar</button>
+          <button type="button" className="cli-btn-voltar" onClick={() => navigate("/microcredito/dashboard/emprestimos")}><X size={16} /> Cancelar</button>
           {cliente ? (
             <button type="submit" className="cli-btn-novo" disabled={aGravar}>
               {aGravar ? <Loader2 size={16} className="emp-girar" /> : <Save size={16} />} {aGravar ? "A criar..." : "Criar empréstimo"}

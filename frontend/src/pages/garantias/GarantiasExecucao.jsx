@@ -53,7 +53,7 @@ const GarantiasExecucao = () => {
           <span className="cli-pill"><CalendarDays size={16} /> Após {REGRAS_GARANTIA.diasExecucao} dias de atraso</span>
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-io" onClick={() => navigate("/imperial/dashboard/garantias/penhoradas")}><Lock size={16} /> Penhoradas</button>
+          <button type="button" className="cli-btn-io" onClick={() => navigate("/microcredito/dashboard/garantias/penhoradas")}><Lock size={16} /> Penhoradas</button>
         </div>
       </header>
 
@@ -93,7 +93,7 @@ const GarantiasExecucao = () => {
                     </Requisito>
                   </ul>
                   <footer>
-                    <button type="button" className="cli-btn-voltar" onClick={() => navigate(`/imperial/dashboard/garantias/${g.id}`)}><Eye size={15} /> Ver</button>
+                    <button type="button" className="cli-btn-voltar" onClick={() => navigate(`/microcredito/dashboard/garantias/${g.id}`)}><Eye size={15} /> Ver</button>
                     {!r.notificado ? (
                       <button type="button" className="cli-btn-io" onClick={() => setAccao({ tipo: "notificar", garantia: g })}><BellRing size={15} /> Notificar</button>
                     ) : null}
@@ -137,7 +137,7 @@ const GarantiasExecucao = () => {
                   <td className="gar-motivo">{g.motivo_execucao}</td>
                   <td><ChipMT valor={g.valor} tom="is-azul" /></td>
                   <td>{g.valor_recuperado != null ? <ChipMT valor={g.valor_recuperado} icone={CheckCircle2} /> : <span className="cli-chip is-cinza">Não indicado</span>}</td>
-                  <td><span className="pag-accoes"><button type="button" title="Ver garantia" onClick={() => navigate(`/imperial/dashboard/garantias/${g.id}`)}><Eye size={15} /></button></span></td>
+                  <td><span className="pag-accoes"><button type="button" title="Ver garantia" onClick={() => navigate(`/microcredito/dashboard/garantias/${g.id}`)}><Eye size={15} /></button></span></td>
                 </tr>
               ))}
             </tbody>

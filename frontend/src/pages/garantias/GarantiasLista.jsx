@@ -96,8 +96,8 @@ const GarantiasLista = () => {
           <span className="cli-pill"><Layers size={16} /> {garantias.length} garantia{garantias.length === 1 ? "" : "s"}</span>
         </div>
         <div className="cli-top-actions">
-          <button type="button" className="cli-btn-io" onClick={() => navigate("/imperial/dashboard/garantias/alertas")}><AlertTriangle size={16} /> Alertas</button>
-          <button type="button" className="cli-btn-novo" onClick={() => navigate("/imperial/dashboard/garantias/nova")}><Plus size={16} /> Nova garantia</button>
+          <button type="button" className="cli-btn-io" onClick={() => navigate("/microcredito/dashboard/garantias/alertas")}><AlertTriangle size={16} /> Alertas</button>
+          <button type="button" className="cli-btn-novo" onClick={() => navigate("/microcredito/dashboard/garantias/nova")}><Plus size={16} /> Nova garantia</button>
         </div>
       </header>
 
@@ -165,7 +165,7 @@ const GarantiasLista = () => {
                   <td><ChipData data={g.data_registo} /></td>
                   <td>
                     <span className="pag-accoes">
-                      <button type="button" title="Ver detalhes" onClick={() => navigate(`/imperial/dashboard/garantias/${g.id}`)}><Eye size={15} /></button>
+                      <button type="button" title="Ver detalhes" onClick={() => navigate(`/microcredito/dashboard/garantias/${g.id}`)}><Eye size={15} /></button>
                       {g.status === "Em Avaliação" ? (
                         <button type="button" title="Aprovar" onClick={() => setAccao({ tipo: "aprovar", garantia: g })}><CheckCircle2 size={15} /></button>
                       ) : null}

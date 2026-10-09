@@ -19,8 +19,8 @@
   --bg-color: #ffffff;
   --card-bg: #ffffff;
   --modal-bg: #ffffff;
-  --imperial-green: #106a37;
-  --imperial-green-dark: #0d5a2e;
+  --sistema-green: #106a37;
+  --sistema-green-dark: #0d5a2e;
 }
 
 /* Estilos base */
@@ -32,7 +32,7 @@
   font-family: var(--font-family-bai, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
 }
 
-/* ========== Design alinhado ao menu Clientes (Imperial) ========== */
+/* ========== Design alinhado ao menu Clientes ========== */
 .seguros-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -58,7 +58,7 @@
 }
 
 .seguros-title-icon {
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   font-size: 1.4rem;
 }
 
@@ -82,7 +82,7 @@
   border-radius: 10px;
   border: 1px solid rgba(16, 106, 55, 0.3);
   background: #fff;
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -91,7 +91,7 @@
 
 .seguros-btn-export:hover {
   background: rgba(16, 106, 55, 0.08);
-  color: var(--imperial-green-dark);
+  color: var(--sistema-green-dark);
 }
 
 .seguros-toolbar {
@@ -116,7 +116,7 @@
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   font-size: 1rem;
   pointer-events: none;
 }
@@ -134,7 +134,7 @@
 
 .seguros-search:focus {
   outline: none;
-  border-color: var(--imperial-green);
+  border-color: var(--sistema-green);
   box-shadow: 0 0 0 3px rgba(16, 106, 55, 0.12);
 }
 
@@ -153,7 +153,7 @@
 
 .seguros-filter-toggle.active,
 .seguros-filter-toggle:hover {
-  color: var(--imperial-green);
+  color: var(--sistema-green);
 }
 
 .seguros-reload {
@@ -164,7 +164,7 @@
   border-radius: 10px;
   border: 1px solid rgba(16, 106, 55, 0.3);
   background: #fff;
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -172,7 +172,7 @@
 }
 
 .seguros-reload:hover:not(:disabled) {
-  background: var(--imperial-green);
+  background: var(--sistema-green);
   color: #fff;
   transform: translateY(-1px);
 }
@@ -273,7 +273,7 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  background: linear-gradient(135deg, var(--imperial-green), var(--imperial-green-dark));
+  background: linear-gradient(135deg, var(--sistema-green), var(--sistema-green-dark));
   color: #fff;
 }
 
@@ -297,7 +297,7 @@
   position: sticky;
   right: 0;
   z-index: 4;
-  background: linear-gradient(135deg, var(--imperial-green), var(--imperial-green-dark));
+  background: linear-gradient(135deg, var(--sistema-green), var(--sistema-green-dark));
   box-shadow: -10px 0 16px rgba(0, 0, 0, 0.12);
   min-width: 280px;
 }
@@ -373,7 +373,7 @@
   border: none;
   border-radius: 6px;
   background: rgba(16, 106, 55, 0.15);
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   cursor: pointer;
   font-size: 0.85rem;
   transition: background 0.2s;
@@ -393,7 +393,7 @@
 
 .seguros-badge-ativo {
   background: rgba(16, 106, 55, 0.12);
-  color: var(--imperial-green);
+  color: var(--sistema-green);
 }
 
 .seguros-badge-pendente {
@@ -476,7 +476,7 @@
   border-radius: 8px;
   border: none;
   background: rgba(16, 106, 55, 0.12);
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
@@ -501,7 +501,7 @@
 }
 
 .seguros-btn-view:hover {
-  background: var(--imperial-green);
+  background: var(--sistema-green);
   color: #fff;
   transform: translateY(-1px);
 }
@@ -539,7 +539,7 @@
 
 .seguros-empty-icon {
   font-size: 2.5rem;
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   margin-bottom: 12px;
   display: block;
 }
@@ -567,13 +567,13 @@
   border-radius: 10px;
   border: 1px solid rgba(16, 106, 55, 0.25);
   background: #fff;
-  color: var(--imperial-green);
+  color: var(--sistema-green);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .seguros-pagination-btn:hover:not(:disabled) {
-  background: var(--imperial-green);
+  background: var(--sistema-green);
   color: #fff;
   transform: scale(1.05);
 }

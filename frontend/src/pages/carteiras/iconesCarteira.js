@@ -43,4 +43,4 @@ export const CORES_TIPO_CARTEIRA = {
   Outro: "#7c3aed",
 };
 
-export const CAMINHO_CAR = "/imperial/dashboard/modulo/carteiras";
+export const CAMINHO_CAR = "/microcredito/dashboard/modulo/carteiras";

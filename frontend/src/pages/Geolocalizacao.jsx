@@ -13,7 +13,7 @@ import {
   FaHistory,
 } from "react-icons/fa";
 import api from "../services/api";
-import ImperialSelect from "../components/ImperialSelect/ImperialSelect";
+import SistemaSelect from "../components/SistemaSelect/SistemaSelect";
 import "./Geolocalizacao.css";
 
 // Corrige ícones default do Leaflet no Vite
@@ -353,7 +353,7 @@ const Geolocalizacao = () => {
         <div className="geo-filter-title">
           <FaFilter /> Filtros
         </div>
-        <ImperialSelect
+        <SistemaSelect
           aria-label="Filtrar por bomba"
           value={filtros.bomba_id}
           onChange={(e) =>
@@ -364,7 +364,7 @@ const Geolocalizacao = () => {
             ...bombas.map((b) => ({ value: String(b.id), label: b.nome_bomba })),
           ]}
         />
-        <ImperialSelect
+        <SistemaSelect
           aria-label="Filtrar por agente"
           value={filtros.agente_id}
           onChange={(e) => setFiltros((f) => ({ ...f, agente_id: e.target.value }))}
