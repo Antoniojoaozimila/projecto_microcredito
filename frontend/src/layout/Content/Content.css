@@ -1,0 +1,21 @@
+.main-content {
+  background: linear-gradient(135deg, #ffffff 0%, #2d3436 50%, #fafcfb 100%);
+  flex: 1;
+  padding: 32px;
+}
+
+  @media screen and (max-width: 1400px) {
+    .main-content {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+  }
+  
+
+  @media screen and (max-width: 1200px) {
+    .main-content {
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+  }

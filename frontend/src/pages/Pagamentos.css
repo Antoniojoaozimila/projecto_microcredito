@@ -1,0 +1,570 @@
+/* Página Pagamentos — alinhada ao sistema Imperial Insurance, fundo padrão */
+
+.pagamentos-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 200px;
+}
+
+.pagamentos-page .page-loader {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagamentos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pagamentos-title {
+  font-family: var(--font-family-bai, inherit);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagamentos-title-icon {
+  color: #106a37;
+  font-size: 1.4rem;
+}
+
+.pagamentos-cache {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #666;
+  margin-left: 6px;
+}
+
+.pagamentos-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pagamentos-pdf-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pagamentos-btn-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(16, 106, 55, 0.3);
+  background: #fff;
+  color: #106a37;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.pagamentos-btn-pdf:hover {
+  background: #106a37;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.pagamentos-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.pagamentos-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+}
+
+.pagamentos-search-wrap svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #106a37;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.pagamentos-search {
+  width: 100%;
+  padding: 10px 12px 10px 38px;
+  border: 1px solid rgba(16, 106, 55, 0.2);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #333;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pagamentos-search:focus {
+  outline: none;
+  border-color: #106a37;
+  box-shadow: 0 0 0 3px rgba(16, 106, 55, 0.12);
+}
+
+.pagamentos-reload {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(16, 106, 55, 0.3);
+  background: #fff;
+  color: #106a37;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.pagamentos-reload:hover:not(:disabled) {
+  background: #106a37;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.pagamentos-reload:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pagamentos-spin {
+  animation: pagamentos-spin 0.8s linear infinite;
+}
+
+@keyframes pagamentos-spin {
+  to { transform: rotate(360deg); }
+}
+
+.pagamentos-table-wrap {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 106, 55, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.pagamentos-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.pagamentos-table tbody tr {
+  white-space: nowrap;
+}
+
+.pagamentos-table thead {
+  background: linear-gradient(135deg, #106a37, #0d5a2e);
+  color: #fff;
+}
+
+
+.pagamentos-table tbody tr {
+  border-bottom: 1px solid rgba(16, 106, 55, 0.08);
+  transition: background 0.2s;
+}
+
+.pagamentos-table tbody tr:hover {
+  background: rgba(16, 106, 55, 0.04);
+}
+
+.pagamentos-table td {
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+.pagamentos-table th {
+  white-space: nowrap;
+  padding: 10px 12px;
+  font-size: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pagamentos-cell-id {
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
+.pagamentos-cell-nowrap {
+  white-space: nowrap;
+}
+
+.pagamentos-cell-apolice {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.pagamentos-cell-valor {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.pagamentos-cell-ref {
+  background: rgba(16, 106, 55, 0.08);
+  font-variant-numeric: tabular-nums;
+}
+
+.pagamentos-ref-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(16, 106, 55, 0.15);
+  color: #0d5a2e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.pagamentos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.pagamentos-badge-pago {
+  background: rgba(16, 106, 55, 0.15);
+  color: #0d5a2e;
+}
+
+.pagamentos-badge-pendente,
+.pagamentos-badge-validando {
+  background: rgba(243, 156, 18, 0.2);
+  color: #b7791f;
+}
+
+.pagamentos-badge-falhou {
+  background: rgba(231, 76, 60, 0.15);
+  color: #c0392b;
+}
+
+.pagamentos-cell-actions-wrap {
+  white-space: nowrap;
+}
+
+.pagamentos-cell-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.pagamentos-btn-view-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 8px;
+  border: none;
+  background: rgba(16, 106, 55, 0.12);
+  color: #106a37;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.pagamentos-btn-view-icon:hover {
+  background: #106a37;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.pagamentos-btn-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #106a37;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.pagamentos-btn-confirm:hover {
+  background: #0d5a2e;
+  transform: translateY(-1px);
+}
+
+.pagamentos-btn-confirm:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pagamentos-confirmado {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #0d5a2e;
+  font-weight: 600;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.pagamentos-empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.pagamentos-empty-icon {
+  font-size: 3rem;
+  color: rgba(16, 106, 55, 0.25);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Paginação */
+.pagamentos-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+}
+
+.pagamentos-pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(16, 106, 55, 0.25);
+  background: #fff;
+  color: #106a37;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagamentos-pagination-btn:hover:not(:disabled) {
+  background: #106a37;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.pagamentos-pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagamentos-pagination-info {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.pagamentos-btn-comprovativo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(16, 106, 55, 0.12);
+  color: #106a37;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.pagamentos-btn-comprovativo:hover {
+  background: #106a37;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.pagamentos-anexos-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.pagamentos-btn-fecho {
+  background: rgba(52, 73, 94, 0.12);
+  color: #34495e;
+}
+
+.pagamentos-btn-fecho:hover {
+  background: #34495e;
+  color: #fff;
+}
+
+.pagamentos-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.pagamentos-modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.pagamentos-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  transition: background 0.2s;
+}
+
+.pagamentos-modal-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.pagamentos-modal-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.pagamentos-btn-pdf-filtro {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(16, 106, 55, 0.3);
+  background: #fff;
+  color: #106a37;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.pagamentos-btn-pdf-filtro:hover {
+  background: #106a37;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.pagamentos-chevron-up {
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+}
+
+.pagamentos-pdf-filtro-container {
+  position: relative;
+}
+
+.pagamentos-pdf-filtro-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #fff;
+  border: 1px solid rgba(16, 106, 55, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.pagamentos-pdf-filtro-item {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: #333;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pagamentos-pdf-filtro-item:hover {
+  background: rgba(16, 106, 55, 0.08);
+  color: #106a37;
+}
+
+.pagamentos-pdf-filtro-item.ativo {
+  background: rgba(16, 106, 55, 0.15);
+  color: #106a37;
+  font-weight: 600;
+}
+
+.pagamentos-pdf-filtro-item:not(:last-child) {
+  border-bottom: 1px solid rgba(16, 106, 55, 0.08);
+}
+
+.pagamentos-overlay-filtro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: transparent;
+}

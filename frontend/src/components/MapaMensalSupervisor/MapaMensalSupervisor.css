@@ -1,0 +1,243 @@
+.mapa-mensal-card {
+  margin-bottom: 24px;
+  padding: 20px;
+  border: 1px solid #dfe7e2;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(15, 75, 40, 0.07);
+}
+
+.mapa-mensal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.mapa-mensal-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: #146c3b;
+}
+
+.mapa-mensal-header p {
+  margin: 5px 0 0;
+  color: #667085;
+}
+
+.mapa-mensal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mapa-periodo-box {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 14px;
+  border: 1px solid #dfe7e2;
+  border-radius: 10px;
+  background: #f8fbf9;
+}
+
+.mapa-periodo-tipos {
+  display: flex;
+  gap: 7px;
+}
+
+.mapa-periodo-tipos button {
+  min-height: 39px;
+  border: 1px solid #cdd8d1;
+  border-radius: 8px;
+  padding: 8px 13px;
+  background: #fff;
+  color: #52625a;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.mapa-periodo-tipos button.activo {
+  border-color: #168447;
+  background: #e2f0d9;
+  color: #14532d;
+}
+
+.mapa-mensal-actions label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #52625a;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mapa-mensal-actions input,
+.mapa-mensal-actions button {
+  min-height: 39px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 11px;
+  background: #fff;
+}
+
+.mapa-mensal-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.mapa-mensal-actions .mapa-export {
+  border-color: #168447;
+  background: #168447;
+  color: #fff;
+}
+
+.mapa-mensal-actions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.mapa-resumo {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.mapa-resumo span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f2f9f5;
+  color: #506057;
+}
+
+.mapa-resumo strong {
+  color: #126b35;
+  font-size: 1.1rem;
+}
+
+.mapa-table-wrap {
+  position: relative;
+  min-height: 100px;
+  overflow-x: auto;
+}
+
+.mapa-table {
+  width: 100%;
+  min-width: 1350px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.mapa-table th,
+.mapa-table td {
+  padding: 8px 9px;
+  border: 1px solid #dfe5e1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mapa-table thead tr:first-child th {
+  background: #146c3b;
+  color: #fff;
+}
+
+.mapa-table-modelo thead tr:first-child th {
+  background: #ffffcc;
+  color: #1f1f1f;
+}
+
+.mapa-table-modelo th small {
+  display: block;
+  margin-top: 3px;
+  color: #52625a;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.mapa-table thead tr:nth-child(2) th {
+  background: #e8f5ed;
+  color: #14532d;
+}
+
+.mapa-table tbody tr:nth-child(even) {
+  background: #f8fbf9;
+}
+
+.mapa-table .mapa-valor-row {
+  background: #f2f2f2;
+  color: #1b5e20;
+}
+
+.mapa-table .mapa-agente,
+.mapa-table td:nth-child(2) {
+  text-align: left;
+}
+
+.mapa-table .mapa-agente,
+.mapa-table .mapa-total,
+.mapa-table tfoot {
+  font-weight: 800;
+}
+
+.mapa-table tfoot td {
+  background: #dff2e6;
+  color: #14532d;
+}
+
+.mapa-alert {
+  margin-bottom: 12px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.mapa-loading,
+.mapa-empty {
+  padding: 28px;
+  text-align: center;
+  color: #667085;
+}
+
+.mapa-spin {
+  animation: mapa-spin 0.8s linear infinite;
+}
+
+@keyframes mapa-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .mapa-mensal-header {
+    flex-direction: column;
+  }
+
+  .mapa-resumo {
+    grid-template-columns: 1fr;
+  }
+
+  .mapa-periodo-box,
+  .mapa-mensal-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mapa-periodo-tipos {
+    flex-direction: column;
+  }
+}

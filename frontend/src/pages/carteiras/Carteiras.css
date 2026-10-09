@@ -1,0 +1,166 @@
+@import "../comum/Modulo.css";
+
+.car-saldo {
+  display: grid;
+  gap: 2px;
+}
+
+.car-saldo strong {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.car-saldo small { color: #777; }
+
+.car-fluxo {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  align-items: end;
+  gap: 4px;
+  height: 72px;
+  margin-top: 12px;
+}
+
+.car-fluxo i {
+  display: block;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, #5cc70c, #4AAC05);
+  transition: height 0.4s ease;
+}
+
+.car-fluxo i.is-saida { background: linear-gradient(180deg, #f87171, #dc2626); }
+
+.car-tipo-grelha {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.car-tipo {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 14px 10px;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.car-tipo:hover,
+.car-tipo.is-activo {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--tipo-cor, #4AAC05) 45%, transparent);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--tipo-cor, #4AAC05) 16%, transparent);
+}
+
+.car-tipo.is-activo { background: color-mix(in srgb, var(--tipo-cor, #4AAC05) 8%, #fff); }
+
+.car-tipo span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--tipo-cor, #4AAC05) 12%, #fff);
+  color: var(--tipo-cor, #4AAC05);
+}
+
+.car-linha-sinal { font-weight: 600; }
+.car-linha-sinal.is-entrada { color: #2f7a04; }
+.car-linha-sinal.is-saida { color: #dc2626; }
+
+.car-tipo {
+  position: relative;
+  overflow: hidden;
+}
+
+.car-tipo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.car-tipo:hover::after,
+.car-tipo.is-activo::after { transform: translateX(120%); }
+
+.car-tipo:hover { transform: translateY(-5px) scale(1.03); }
+.car-tipo.is-activo { transform: translateY(-4px); }
+
+.car-tipo-logo,
+.car-tipo span {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.car-tipo:hover .car-tipo-logo,
+.car-tipo:hover span,
+.car-tipo.is-activo .car-tipo-logo { transform: rotate(-8deg) scale(1.08); }
+
+.car-tipo-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.car-logo-caixa {
+  display: grid;
+  gap: 10px;
+}
+
+.car-logo-preview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1px dashed rgba(74, 172, 5, 0.4);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(74, 172, 5, 0.08), #fff);
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.car-logo-preview:hover {
+  transform: translateY(-3px);
+  border-color: #4AAC05;
+  box-shadow: 0 12px 24px rgba(74, 172, 5, 0.12);
+}
+
+.car-logo-preview img,
+.car-logo-preview em {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  color: #4AAC05;
+  font-style: normal;
+}
+
+.car-logo-preview img { object-fit: contain; padding: 6px; }
+.car-logo-preview strong { display: block; font-weight: 600; }
+.car-logo-preview small { color: #777; }
+
+.car-gestao-card .emp-carteira-logo {
+  transition: transform 0.3s ease;
+}
+
+.car-gestao-card:hover .emp-carteira-logo {
+  transform: rotate(-8deg) scale(1.08);
+}

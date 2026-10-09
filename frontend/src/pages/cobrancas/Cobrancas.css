@@ -1,0 +1,188 @@
+@import "../comum/Modulo.css";
+
+.cob-rota-lista {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cob-parada {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding: 14px;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  background: #fff;
+  animation: mod-subir 0.4s ease both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.cob-parada:hover {
+  transform: translateY(-3px);
+  border-color: rgba(74, 172, 5, 0.4);
+  box-shadow: 0 12px 24px rgba(74, 172, 5, 0.1);
+}
+
+.cob-ordem {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(74, 172, 5, 0.12);
+  color: #2f7a04;
+  font-weight: 700;
+}
+
+.cob-parada.is-atraso .cob-ordem {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.cob-parada h3 { margin: 0 0 4px; font-size: 0.98rem; font-weight: 600; }
+.cob-parada p { margin: 0; color: #666; font-size: 0.8rem; }
+.cob-parada-acoes { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+
+.cob-hero-rota {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cob-resumo-anel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #ececec;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.cob-resumo-anel strong { display: block; font-size: 1.1rem; }
+.cob-resumo-anel small { color: #777; }
+
+.cob-item-parcela {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #fafafa;
+  font-size: 0.8rem;
+}
+
+.cob-ordenacao {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.cob-ordenacao button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.cob-ordenacao button:hover { border-color: #4AAC05; color: #4AAC05; }
+
+.cob-excedentes {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px dashed rgba(234, 179, 8, 0.45);
+  border-radius: 12px;
+  background: rgba(234, 179, 8, 0.06);
+  color: #92400e;
+  font-size: 0.82rem;
+}
+
+.cob-mapa-hero {
+  margin-bottom: 16px;
+}
+
+.cob-mapa-hero h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+}
+
+.cob-zona-grelha {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.cob-zona-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+  background: #fff;
+  animation: mod-subir 0.4s ease both;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.cob-zona-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--cartao-cor, #4AAC05) 40%, #ececec);
+  box-shadow: 0 18px 34px color-mix(in srgb, var(--cartao-cor, #4AAC05) 16%, transparent);
+}
+
+.cob-zona-card.is-sel {
+  border-color: #4AAC05;
+  box-shadow: 0 0 0 3px rgba(74, 172, 5, 0.16);
+}
+
+.cob-zona-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cob-zona-stats li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #f7faf4;
+}
+
+.cob-zona-stats i {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(74, 172, 5, 0.12);
+  color: #4AAC05;
+}
+
+.cob-zona-stats span { display: grid; min-width: 0; }
+.cob-zona-stats small { color: #777; font-size: 0.7rem; }
+.cob-zona-stats strong { overflow: hidden; color: #111; font-size: 0.82rem; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .cob-hero-rota { grid-template-columns: 1fr; }
+  .cob-parada { grid-template-columns: auto 1fr; }
+  .cob-parada-acoes { grid-column: 1 / -1; justify-content: flex-start; }
+}

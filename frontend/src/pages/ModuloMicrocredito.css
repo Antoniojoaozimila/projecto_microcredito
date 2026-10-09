@@ -1,0 +1,17 @@
+.modulo-page {
+  min-height: 240px;
+  padding: 28px 8px;
+}
+
+.modulo-page h1 {
+  margin: 0 0 10px;
+  color: #106a37;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.modulo-page p {
+  margin: 0;
+  color: #3f6212;
+  font-size: 0.98rem;
+}

@@ -1,0 +1,80 @@
+/* Loader de página — alinhado ao sistema Imperial Insurance */
+
+.page-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  padding: 48px 24px;
+}
+
+.page-loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.page-loader-logo-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.page-loader-logo {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: pageLoaderLogo 2s ease-in-out infinite;
+}
+
+.page-loader-ring {
+  position: absolute;
+  inset: -6px;
+  border: 3px solid rgba(16, 106, 55, 0.2);
+  border-top-color: #106a37;
+  border-radius: 50%;
+  animation: pageLoaderSpin 1s linear infinite;
+}
+
+@keyframes pageLoaderLogo {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+@keyframes pageLoaderSpin {
+  to { transform: rotate(360deg); }
+}
+
+.page-loader-text {
+  margin: 0;
+  font-family: var(--font-family-bai);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #106a37;
+  letter-spacing: 0.02em;
+}
+
+.page-loader-bar {
+  width: 160px;
+  height: 4px;
+  background: rgba(16, 106, 55, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.page-loader-progress {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, #106a37, #0d5a2e);
+  border-radius: 4px;
+  animation: pageLoaderProgress 1.2s ease-in-out infinite;
+}
+
+@keyframes pageLoaderProgress {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(150%); }
+  100% { transform: translateX(-100%); }
+}

@@ -1,0 +1,106 @@
+# Stack de produção para o Docker Manager da Hostinger.
+# Site:  https://148-230-115-150.sslip.io
+# Mobile web: https://148-230-115-150.sslip.io/m/
+# API (a mesma): https://148-230-115-150.sslip.io/api
+#
+# Credenciais iguais às do backend/.env (esse ficheiro não sobe para o GitHub).
+# Este compose SIM sobe: quem tiver acesso ao repositório vê estas senhas.
+
+name: microcredito
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: microcredito
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --max-connections=80
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks:
+      - interno
+
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORTA: "3000"
+      DB_HOST: mysql
+      DB_PORTA: "3306"
+      DB_NOME: microcredito
+      DB_UTILIZADOR: root
+      DB_SENHA: root123
+      JWT_SEGREDO: microcredito-local-segredo-2026
+      JWT_EXPIRA: 12h
+      DOMINIO: ${DOMINIO:-148-230-115-150.sslip.io}
+      CORS_ORIGENS: ${CORS_ORIGENS:-https://148-230-115-150.sslip.io,http://148.230.115.150}
+      SEMEAR_ADMIN_TESTE: ${SEMEAR_ADMIN_TESTE:-false}
+      ADMIN_SENHA_INICIAL: ${ADMIN_SENHA_INICIAL:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - interno
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ""
+    restart: unless-stopped
+    networks:
+      - interno
+
+  mobile:
+    build:
+      context: ./mobile
+      args:
+        EXPO_PUBLIC_API_URL: ${EXPO_PUBLIC_API_URL:-https://148-230-115-150.sslip.io}
+    restart: unless-stopped
+    networks:
+      - interno
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMINIO: ${DOMINIO:-148-230-115-150.sslip.io}
+      IP_PUBLICO: ${IP_PUBLICO:-148.230.115.150}
+      CADDY_EMAIL: ${CADDY_EMAIL:-admin@localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+      - frontend
+      - mobile
+    networks:
+      - publico
+      - interno
+
+networks:
+  publico:
+  interno:
+    internal: true
+
+volumes:
+  mysql_data:
+  caddy_data:
+  caddy_config:

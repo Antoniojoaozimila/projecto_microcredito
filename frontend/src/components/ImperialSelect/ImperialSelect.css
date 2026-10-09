@@ -1,0 +1,163 @@
+.imperial-select {
+  position: relative;
+  display: inline-block;
+  min-width: 180px;
+  width: 100%;
+  max-width: 100%;
+  font-family: var(--font-family-bai, "Bai Jamjuree", sans-serif);
+  z-index: 1;
+}
+
+.imperial-select.is-open {
+  z-index: 40;
+}
+
+.imperial-select.is-disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.imperial-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 106, 55, 0.28);
+  background: #f8faf9;
+  color: #0e4d3a;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.imperial-select-trigger:hover {
+  border-color: #106a37;
+  background: #eef7f1;
+  box-shadow: 0 0 0 3px rgba(16, 106, 55, 0.12);
+}
+
+.imperial-select.is-open .imperial-select-trigger,
+.imperial-select-trigger:focus {
+  outline: none;
+  border-color: #106a37;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(16, 106, 55, 0.18);
+}
+
+.imperial-select-value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.imperial-select-value.is-placeholder {
+  color: #6b7c76;
+  font-weight: 400;
+}
+
+.imperial-select-chevron {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: #106a37;
+  transition: transform 0.2s ease;
+}
+
+.imperial-select.is-open .imperial-select-chevron {
+  transform: rotate(180deg);
+}
+
+.imperial-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid rgba(16, 106, 55, 0.18);
+  border-radius: 10px;
+  box-shadow: 0 14px 32px rgba(14, 77, 58, 0.16);
+  max-height: 260px;
+  overflow-y: auto;
+  animation: imperialSelectIn 0.16s ease-out;
+  z-index: 50;
+}
+
+@keyframes imperialSelectIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.imperial-select-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #0e4d3a;
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* Hover personalizado verde — substitui o azul nativo */
+.imperial-select-option:hover {
+  background: rgba(16, 106, 55, 0.12) !important;
+  color: #0a3d2a !important;
+}
+
+.imperial-select-option.is-active {
+  background: #106a37 !important;
+  color: #fff !important;
+}
+
+.imperial-select-option.is-active:hover {
+  background: #0d5a2e !important;
+  color: #fff !important;
+}
+
+.imperial-select-check {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Em filtros horizontais, manter largura confortável */
+.geo-filters .imperial-select,
+.am-filter-group .imperial-select {
+  width: auto;
+  min-width: 200px;
+}
+
+.am-filter-group .imperial-select-trigger {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  min-height: 38px;
+}
+
+.am-filter-group .imperial-select-trigger:hover,
+.am-filter-group .imperial-select.is-open .imperial-select-trigger {
+  background: rgba(16, 106, 55, 0.06);
+  box-shadow: none;
+}

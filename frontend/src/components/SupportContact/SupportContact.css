@@ -1,0 +1,118 @@
+.support-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.support-contact-label {
+  font-size: 0.65rem;
+  color: #555;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.support-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s,
+    background 0.2s,
+    border-color 0.2s,
+    filter 0.2s;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 10px rgba(16, 106, 55, 0.06);
+}
+
+.support-contact-btn svg {
+  font-size: 0.88rem;
+  flex-shrink: 0;
+}
+
+.support-contact-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 22px rgba(16, 106, 55, 0.14);
+}
+
+.support-contact-btn.whatsapp {
+  color: #25d366;
+  border: 1.5px solid rgba(37, 211, 102, 0.45);
+}
+
+.support-contact-btn.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: #25d366;
+}
+
+.support-contact-btn.sms {
+  color: #106a37;
+  border: 1.5px solid rgba(16, 106, 55, 0.35);
+}
+
+.support-contact-btn.sms:hover {
+  background: rgba(16, 106, 55, 0.08);
+  border-color: #106a37;
+}
+
+.support-contact-btn.tel {
+  color: #0d5a2e;
+  border: 1.5px solid rgba(13, 90, 46, 0.35);
+}
+
+.support-contact-btn.tel:hover {
+  background: rgba(13, 90, 46, 0.08);
+  border-color: #0d5a2e;
+}
+
+.support-contact--login {
+  justify-content: center;
+  margin-top: 0;
+  gap: 10px;
+}
+
+.support-contact--login .support-contact-btn {
+  font-size: 0.75rem;
+  padding: 9px 16px;
+}
+
+.support-contact--footer {
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.support-contact--footer .support-contact-btn {
+  font-size: 0.62rem;
+  padding: 5px 10px;
+  gap: 4px;
+}
+
+.support-contact--footer .support-contact-btn svg {
+  font-size: 0.75rem;
+}
+
+.support-contact--legal {
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.support-contact--legal .support-contact-btn {
+  font-size: 0.78rem;
+  padding: 7px 14px;
+}
+
+@media (max-width: 480px) {
+  .support-contact--footer .support-contact-btn {
+    font-size: 0.58rem;
+    padding: 4px 8px;
+  }
+}

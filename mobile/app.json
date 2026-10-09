@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "NBMM\nMicrocrédito",
+    "slug": "nbmm-microcredito",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon2.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/icon2.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "icon": "./assets/icon2.png"
+    },
+    "android": {
+      "usesCleartextTraffic": true,
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/icon2.png"
+      },
+      "package": "com.antonio_zimila.nbmmmicrocredito"
+    },
+    "web": {
+      "favicon": "./assets/icon2.png",
+      "name": "NBMM Microcrédito"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e5b93191-4848-44a9-a52f-e1878fdf10b3"
+      }
+    }
+  }
+}

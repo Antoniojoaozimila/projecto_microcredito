@@ -1,0 +1,28 @@
+{
+  "cli": {
+    "version": ">= 24.10.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://148-230-115-150.sslip.io"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://148-230-115-150.sslip.io"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

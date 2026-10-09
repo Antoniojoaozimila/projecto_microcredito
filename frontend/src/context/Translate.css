@@ -1,0 +1,26 @@
+/* Google Translate — esconder a barra nativa */
+#google_translate_element,
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+.skiptranslate > iframe,
+body > .skiptranslate,
+.goog-te-gadget,
+iframe.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
+  display: none !important;
+  box-shadow: none !important;
+}
+
+font font {
+  background: transparent !important;
+  box-shadow: none !important;
+}

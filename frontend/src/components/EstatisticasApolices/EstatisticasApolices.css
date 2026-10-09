@@ -1,0 +1,181 @@
+.estat-apolices {
+  margin-bottom: 28px;
+}
+
+.estat-apolices-header {
+  margin-bottom: 16px;
+}
+
+.estat-apolices-title-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #106a37, #0d5a2e);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 20px rgba(16, 106, 55, 0.25);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.estat-apolices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.estat-apolices-card {
+  position: relative;
+  padding: 18px 18px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(16, 106, 55, 0.14);
+  background: linear-gradient(160deg, #ffffff 0%, #f6fbf8 100%);
+  box-shadow: 0 4px 16px rgba(16, 106, 55, 0.06);
+  overflow: hidden;
+  animation: estatCardIn 0.45s ease backwards;
+  animation-delay: var(--delay, 0s);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.25s ease;
+}
+
+.estat-apolices-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.estat-apolices-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(16, 106, 55, 0.35);
+  box-shadow: 0 18px 40px rgba(16, 106, 55, 0.16);
+}
+
+.estat-apolices-card:hover::before {
+  animation: estatShine 0.8s ease;
+}
+
+@keyframes estatCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes estatShine {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(120%); }
+}
+
+.estat-apolices-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.estat-apolices-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(16, 106, 55, 0.12);
+  color: #106a37;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.estat-apolices-card:hover .estat-apolices-icon {
+  transform: scale(1.12) rotate(-4deg);
+  background: rgba(16, 106, 55, 0.2);
+}
+
+.estat-apolices-card--finalizada .estat-apolices-icon {
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+}
+
+.estat-apolices-card--alocada .estat-apolices-icon {
+  background: rgba(217, 119, 6, 0.12);
+  color: #d97706;
+}
+
+.estat-apolices-card--total .estat-apolices-icon {
+  background: rgba(16, 106, 55, 0.18);
+  color: #0d5a2e;
+}
+
+.estat-apolices-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.estat-apolices-trend--positivo {
+  color: #106a37;
+  background: rgba(16, 106, 55, 0.1);
+}
+
+.estat-apolices-trend--negativo {
+  color: #b45309;
+  background: rgba(180, 83, 9, 0.1);
+}
+
+.estat-apolices-trend--neutro {
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.1);
+}
+
+.estat-apolices-label {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #5a6b62;
+  font-weight: 500;
+}
+
+.estat-apolices-valor {
+  margin: 6px 0 10px;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #106a37;
+  letter-spacing: -0.02em;
+}
+
+.estat-apolices-bar {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(16, 106, 55, 0.08);
+  overflow: hidden;
+}
+
+.estat-apolices-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #106a37, #25d366);
+  transition: width 0.6s ease;
+}
