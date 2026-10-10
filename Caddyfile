@@ -5,9 +5,11 @@
 nbmm.tech, www.nbmm.tech {
 	encode gzip
 
-	redir /imperial /microcredito permanent
-	@imperial path_regexp imperial ^/imperial(/.*)?$
-	redir @imperial /microcredito{re.imperial.1} permanent
+	redir /imperial /microcredito/login permanent
+
+	handle_path /imperial/* {
+		redir * /microcredito{uri} permanent
+	}
 
 	handle /api* {
 		reverse_proxy backend:3000
