@@ -8,8 +8,9 @@ import {
 import { AuthContext } from "../../contexts/AuthContext";
 import { obterCliente } from "../../services/clientesMicrocredito";
 import {
-  SEM_GARANTIA, aprovarEmprestimo, calcularMapaOperacao, periodoTaxa, rotuloJuros, cancelarEmprestimo, classeEstado, formatarData, formatarMT, listarCarteiras, obterEmprestimo, rejeitarEmprestimo,
+  SEM_GARANTIA, alterarDatasEmprestimo, aprovarEmprestimo, calcularMapaOperacao, periodoTaxa, rotuloJuros, cancelarEmprestimo, classeEstado, formatarData, formatarMT, listarCarteiras, obterEmprestimo, obterModalidade, rejeitarEmprestimo,
 } from "../../services/emprestimosMicrocredito";
+import { diaDoRegisto, hojeDia } from "../../utils/dataRegisto";
 import { descarregarContrato, descarregarRecibo } from "./reciboEmprestimo";
 import { descarregarReciboPagamento } from "../pagamentos/reciboPagamento";
 import { classeEstadoPagamento, dadosDoRecibo, pagamentosDoEmprestimo } from "../../services/pagamentosMicrocredito";
@@ -28,12 +29,53 @@ const Item = ({ icon: Icone, rotulo, valor, indice = 0 }) => (
   </div>
 );
 
+const ModalDatas = ({ emprestimo, onFechar, onGuardar }) => {
+  const mensal = Boolean(obterModalidade(emprestimo.modalidade)?.meses);
+  const [form, setForm] = useState({
+    data_registo: diaDoRegisto(emprestimo.data_registo),
+    data_inicio: emprestimo.data_inicio || "",
+    dia_vencimento: emprestimo.data_primeiro_vencimento || "",
+  });
+  const set = (campo, valor) => setForm((atual) => ({ ...atual, [campo]: valor }));
+  return createPortal(
+    <div className="cli-modal-fundo" role="presentation">
+      <div className="cli-modal" role="dialog" aria-modal="true">
+        <span className="cli-modal-icone"><CalendarDays size={30} /></span>
+        <h2>Alterar datas do empréstimo</h2>
+        <small className="cli-modal-texto">O cronograma é recalculado com as novas datas. Disponível apenas antes da aprovação.</small>
+        <div className="cli-grid">
+          <div className="cli-field">
+            <label><CalendarDays size={15} /> Data de registo *</label>
+            <input type="date" max={hojeDia()} value={form.data_registo} onChange={(e) => set("data_registo", e.target.value)} />
+          </div>
+          <div className="cli-field">
+            <label><CalendarDays size={15} /> Data de início *</label>
+            <input type="date" min={form.data_registo || undefined} value={form.data_inicio} onChange={(e) => set("data_inicio", e.target.value)} />
+          </div>
+          {mensal ? (
+            <div className="cli-field">
+              <label><CalendarClock size={15} /> Data do 1.º vencimento *</label>
+              <input type="date" min={form.data_inicio || undefined} value={form.dia_vencimento} onChange={(e) => set("dia_vencimento", e.target.value)} />
+            </div>
+          ) : null}
+        </div>
+        <div className="cli-actions">
+          <button type="button" className="cli-btn ghost" onClick={onFechar}>Cancelar</button>
+          <button type="button" className="cli-btn" onClick={() => onGuardar(form)}>Guardar datas</button>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+};
+
 const EmprestimoDetalhe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { usuario } = useContext(AuthContext);
   const [emprestimo, setEmprestimo] = useState(() => obterEmprestimo(id));
   const [mensagem, setMensagem] = useState(null);
+  const [editarDatas, setEditarDatas] = useState(false);
 
   if (!emprestimo) {
     return (
@@ -81,6 +123,7 @@ const EmprestimoDetalhe = () => {
             <>
               <button type="button" className="cli-btn-voltar emp-btn-rejeitar" onClick={() => executar(() => rejeitarEmprestimo(emprestimo.id, usuario), "Empréstimo rejeitado.")}><XCircle size={16} /> Rejeitar</button>
               <button type="button" className="cli-btn-voltar" onClick={() => executar(() => cancelarEmprestimo(emprestimo.id, usuario), "Empréstimo cancelado.")}><Ban size={16} /> Cancelar</button>
+              <button type="button" className="cli-btn-io" onClick={() => setEditarDatas(true)}><CalendarDays size={16} /> Alterar datas</button>
               <button type="button" className="cli-btn-novo" onClick={() => executar(() => aprovarEmprestimo(emprestimo.id, usuario), "Empréstimo aprovado.", `${formatarMT(emprestimo.valor_emprestado)} debitados da carteira ${carteira?.nome || ""} e contrato gerado.`)}><BadgeCheck size={16} /> Aprovar e desembolsar</button>
             </>
           ) : null}
@@ -93,6 +136,17 @@ const EmprestimoDetalhe = () => {
           ) : null}
         </div>
       </header>
+
+      {editarDatas ? (
+        <ModalDatas
+          emprestimo={emprestimo}
+          onFechar={() => setEditarDatas(false)}
+          onGuardar={(datas) => {
+            setEditarDatas(false);
+            executar(() => alterarDatasEmprestimo(emprestimo.id, datas, usuario), "Datas do empréstimo actualizadas.", "O cronograma foi recalculado.");
+          }}
+        />
+      ) : null}
 
       {mensagem ? createPortal(
         <div className="cli-modal-fundo" role="presentation">

@@ -14,6 +14,7 @@ import { REGRAS } from "../../services/emprestimosMicrocredito";
 import MenuSuspenso from "./MenuSuspenso";
 import FotoPerfil from "./FotoPerfil";
 import { guardarMapa, prepararFoto } from "../../services/anexosLocais";
+import { diaDoRegisto, erroDataRegisto, hojeDia, manterOuMudarRegisto } from "../../utils/dataRegisto";
 import "./ClienteModulo.css";
 
 const vazio = {
@@ -101,8 +102,8 @@ const ClienteFormulario = () => {
   const existente = useMemo(() => (id ? obterCliente(id) : null), [id]);
   const [form, setForm] = useState(() => (
     existente
-      ? { ...vazio, ...existente, zona_id: String(existente.zona_id || "") }
-      : { ...vazio, tipo_cliente: "" }
+      ? { ...vazio, ...existente, zona_id: String(existente.zona_id || ""), data_registo_dia: diaDoRegisto(existente.data_registo) }
+      : { ...vazio, tipo_cliente: "", data_registo_dia: hojeDia() }
   ));
   const [tipoEscolhido, setTipoEscolhido] = useState(() => Boolean(id && existente?.tipo_cliente));
   const [erros, setErros] = useState({});
@@ -117,6 +118,8 @@ const ClienteFormulario = () => {
   const validar = () => {
     const e = {};
     if (form.nome_completo.trim().length < 3 || form.nome_completo.trim().length > 200) e.nome_completo = "Use entre 3 e 200 caracteres.";
+    const falhaRegisto = erroDataRegisto(form.data_registo_dia);
+    if (falhaRegisto) e.data_registo_dia = falhaRegisto;
     if (fisica && !form.data_nascimento) e.data_nascimento = "Obrigatório para pessoa física.";
     if (fisica && form.data_nascimento && idade(form.data_nascimento) < REGRAS.idadeMinima) e.data_nascimento = `A idade mínima é ${REGRAS.idadeMinima} anos.`;
     if (fisica && form.data_nascimento && idade(form.data_nascimento) > REGRAS.idadeMaxima) e.data_nascimento = `A idade máxima é ${REGRAS.idadeMaxima} anos.`;
@@ -248,9 +251,11 @@ const ClienteFormulario = () => {
     let gravado;
     try {
       const [documentos_anexos, foto_perfil] = await Promise.all([guardarMapa(form.documentos_anexos), prepararFoto(form.foto_perfil)]);
+      const { data_registo_dia, ...dadosForm } = form;
       gravado = guardarCliente(
         {
-          ...form,
+          ...dadosForm,
+          data_registo: manterOuMudarRegisto(existente?.data_registo, data_registo_dia),
           documentos_anexos,
           foto_perfil,
           zona_id: form.zona_id === "__outro" ? form.zona_outra.trim() : form.zona_id,
@@ -324,6 +329,9 @@ const ClienteFormulario = () => {
           </Campo>
           <Campo icon={User} label="Nome completo *" erro={erros.nome_completo} full>
             <input value={form.nome_completo} maxLength={200} onChange={(e) => set("nome_completo", e.target.value)} placeholder="Digite o nome completo" />
+          </Campo>
+          <Campo icon={Calendar} label="Data de registo *" erro={erros.data_registo_dia}>
+            <input type="date" max={hojeDia()} value={form.data_registo_dia || ""} onChange={(e) => set("data_registo_dia", e.target.value)} />
           </Campo>
           {fisica && (
             <Campo icon={Calendar} label="Data de nascimento *" erro={erros.data_nascimento}>

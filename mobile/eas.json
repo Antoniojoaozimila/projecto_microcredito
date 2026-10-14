@@ -12,13 +12,13 @@
       "distribution": "internal",
       "android": { "buildType": "apk" },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://148-230-115-150.sslip.io"
+        "EXPO_PUBLIC_API_URL": "https://nbmm.tech"
       }
     },
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://148-230-115-150.sslip.io"
+        "EXPO_PUBLIC_API_URL": "https://nbmm.tech"
       }
     }
   },

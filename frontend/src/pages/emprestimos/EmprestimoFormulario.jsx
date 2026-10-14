@@ -16,12 +16,12 @@ import {
   GARANTIA_OUTROS, MODALIDADES, OUTRO, REGRAS, SEM_GARANTIA, SISTEMAS, TIPOS_GARANTIA, TIPOS_JUROS,
   calcularEmprestimo, clientesParaEmprestimo, obterModalidade, criarEmprestimo, formatarData, formatarMT, carteirasOperacionais, validarCriacao,
 } from "../../services/emprestimosMicrocredito";
+import { hojeDia as hoje } from "../../utils/dataRegisto";
 import "../clientes/ClienteModulo.css";
 import "./Emprestimos.css";
 
-const hoje = () => new Date().toISOString().slice(0, 10);
-
 const inicial = () => ({
+  data_registo: hoje(),
   client_id: "",
   valor_emprestado: "",
   modalidade: "Mensal",
@@ -99,6 +99,12 @@ const EmprestimoFormulario = () => {
   const carteiras = useMemo(() => (versao >= 0 ? carteirasOperacionais() : []), [versao]);
 
   const set = (campo, valor) => setForm((atual) => ({ ...atual, [campo]: valor }));
+  const mudarRegisto = (valor) =>
+    setForm((atual) => ({
+      ...atual,
+      data_registo: valor,
+      data_inicio: !atual.data_inicio || atual.data_inicio === atual.data_registo || atual.data_inicio < valor ? valor : atual.data_inicio,
+    }));
   const cliente = clientes.find((c) => String(c.id) === String(form.client_id));
   const carteira = carteiras.find((c) => String(c.id) === String(form.carteira_id));
   const modalidade = obterModalidade(form.modalidade);
@@ -214,8 +220,11 @@ const EmprestimoFormulario = () => {
                 <input value={form.tipo_juros_outro} maxLength={80} onChange={(e) => set("tipo_juros_outro", e.target.value)} placeholder="Ex: Juros sobre saldo diário" autoFocus />
               </Campo>
             ) : null}
+            <Campo icon={CalendarDays} label="Data de registo *" erro={erros.data_registo}>
+              <input type="date" max={hoje()} value={form.data_registo} onChange={(e) => mudarRegisto(e.target.value)} />
+            </Campo>
             <Campo icon={CalendarDays} label="Data de início *" erro={erros.data_inicio}>
-              <input type="date" min={hoje()} value={form.data_inicio} onChange={(e) => set("data_inicio", e.target.value)} />
+              <input type="date" min={form.data_registo || undefined} value={form.data_inicio} onChange={(e) => set("data_inicio", e.target.value)} />
             </Campo>
             <Campo icon={Briefcase} label="Sector de actividade / finalidade">
               <MenuSuspenso
@@ -277,6 +286,9 @@ const EmprestimoFormulario = () => {
                 </table>
               </div>
             </details>
+          ) : null}
+          {form.data_inicio && form.data_inicio < hoje() ? (
+            <p className="emp-nota"><CalendarClock size={15} /> Empréstimo com data passada: as parcelas já vencidas entram em atraso logo após a aprovação, e o desembolso fica registado em {formatarData(form.data_inicio)}.</p>
           ) : null}
           {valorNumero > REGRAS.aprovacaoGestorAcima ? (
             <p className="emp-nota"><BadgeCheck size={15} /> Acima de {formatarMT(REGRAS.aprovacaoGestorAcima)}: este empréstimo exige aprovação do gestor.</p>

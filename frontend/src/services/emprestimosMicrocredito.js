@@ -1,5 +1,6 @@
 import { listarClientes, obterCliente } from "./clientesMicrocredito";
 import { lerConfig } from "./configuracoesMicrocredito";
+import { dataRegistoIso, diaDoRegisto, erroDataRegisto, hojeDia } from "../utils/dataRegisto";
 
 const CHAVE_EMPRESTIMOS = "microcredito-emprestimos-v1";
 const CHAVE_CARTEIRAS = "microcredito-carteiras-v2";
@@ -501,8 +502,10 @@ export const validarCriacao = (dados) => {
   if (!Number.isInteger(n) || n < REGRAS.prazoMinimo || n > prazoMaximo) erros.num_parcelas = `Entre ${REGRAS.prazoMinimo} e ${prazoMaximo} parcelas.`;
   const taxa = Number(dados.taxa_juros);
   if (!Number.isFinite(taxa) || taxa < 0 || taxa > 999) erros.taxa_juros = "Indique uma taxa válida.";
-  const hoje = new Date().toISOString().slice(0, 10);
-  if (!dados.data_inicio || dados.data_inicio < hoje) erros.data_inicio = "Use a data de hoje ou uma data futura.";
+  const falhaRegisto = erroDataRegisto(dados.data_registo);
+  if (falhaRegisto) erros.data_registo = falhaRegisto;
+  if (!dados.data_inicio) erros.data_inicio = "Indique a data de início.";
+  else if (!falhaRegisto && dados.data_inicio < dados.data_registo) erros.data_inicio = "Não pode ser anterior à data de registo.";
   if (modalidade?.meses) {
     if (!dados.dia_vencimento) erros.dia_vencimento = "Escolha a data do primeiro vencimento.";
     else if (dados.data_inicio && dados.dia_vencimento <= dados.data_inicio) erros.dia_vencimento = "Deve ser posterior à data de início.";
@@ -530,7 +533,7 @@ export const validarCriacao = (dados) => {
 
 export const criarEmprestimo = (dados, utilizador) => {
   const lista = ler();
-  const agora = new Date().toISOString();
+  const agora = dataRegistoIso(dados.data_registo);
   const calculo = calcularEmprestimo({
     valor: dados.valor_emprestado,
     taxa: dados.taxa_juros,
@@ -579,7 +582,7 @@ export const criarEmprestimo = (dados, utilizador) => {
     })),
     historico: [{ data: agora, accao: "Empréstimo criado", por: utilizador?.nome || "Sistema" }],
     data_registo: agora,
-    data_atualizacao: agora,
+    data_atualizacao: new Date().toISOString(),
     criado_por: utilizador?.nome || "Sistema",
   };
   lista.push(novo);
@@ -616,10 +619,12 @@ export const aprovarEmprestimo = (id, utilizador) => {
   if (!carteira || saldoDisponivel(carteira) < emprestimo.valor_emprestado) throw new Error("A carteira não tem saldo suficiente para o desembolso.");
   const agora = new Date().toISOString();
   const nome = utilizador?.nome || "Sistema";
+  const diaInicio = diaDoRegisto(emprestimo.data_inicio);
+  const dataDesembolso = diaInicio < hojeDia() ? dataRegistoIso(diaInicio) : agora;
   aplicarLancamentos([{
     carteiraId: carteira.id,
     delta: -Number(emprestimo.valor_emprestado),
-    detalhe: { subtipo: "Desembolso Empréstimo", descricao: `Desembolso ${emprestimo.numero_contrato}`, loan_id: emprestimo.id, utilizador: nome },
+    detalhe: { subtipo: "Desembolso Empréstimo", descricao: `Desembolso ${emprestimo.numero_contrato}`, loan_id: emprestimo.id, utilizador: nome, data: dataDesembolso },
   }]);
   return alterar(id, (e) => ({
     ...e,
@@ -628,7 +633,7 @@ export const aprovarEmprestimo = (id, utilizador) => {
     aprovado_por: nome,
     data_aprovacao: agora,
     desembolsado_por: nome,
-    data_desembolso: agora,
+    data_desembolso: dataDesembolso,
     documento_contrato: `${e.numero_contrato}.pdf`,
     historico: [
       ...(e.historico || []),
@@ -663,6 +668,40 @@ export const cancelarEmprestimo = (id, utilizador) => {
       fase_atual: "Concluído",
       parcelas: e.parcelas.map((p) => ({ ...p, status: "Cancelado" })),
       historico: [...(e.historico || []), { data: agora, accao: "Empréstimo cancelado", por: utilizador?.nome || "Sistema" }],
+    };
+  });
+};
+
+/** Corrige as datas de um empréstimo ainda pendente e recalcula o cronograma. */
+export const alterarDatasEmprestimo = (id, { data_registo, data_inicio, dia_vencimento }, utilizador) => {
+  const falhaRegisto = erroDataRegisto(data_registo);
+  if (falhaRegisto) throw new Error(falhaRegisto);
+  if (!data_inicio) throw new Error("Indique a data de início.");
+  if (data_inicio < data_registo) throw new Error("A data de início não pode ser anterior à data de registo.");
+  return alterar(id, (e) => {
+    if (e.status !== "Pendente") throw new Error("Só é possível alterar as datas de empréstimos pendentes.");
+    const mensal = Boolean(obterModalidade(e.modalidade)?.meses);
+    if (mensal && (!dia_vencimento || dia_vencimento <= data_inicio)) throw new Error("O 1.º vencimento deve ser posterior à data de início.");
+    const calculo = calcularEmprestimo({
+      valor: e.valor_emprestado,
+      taxa: e.taxa_juros,
+      parcelas: e.num_parcelas,
+      modalidade: e.modalidade,
+      tipoJuros: e.tipo_juros,
+      sistema: e.sistema_amortizacao,
+      dataInicio: data_inicio,
+      diaVencimento: mensal ? dia_vencimento : e.dia_vencimento,
+    });
+    const registo = diaDoRegisto(e.data_registo) === data_registo ? e.data_registo : dataRegistoIso(data_registo);
+    return {
+      ...e,
+      data_registo: registo,
+      data_inicio,
+      data_vencimento: calculo.ultimoVencimento,
+      data_primeiro_vencimento: calculo.cronograma[0]?.data_vencimento || null,
+      dia_vencimento: mensal ? Number(String(dia_vencimento).slice(8, 10)) : e.dia_vencimento,
+      parcelas: e.parcelas.map((p, i) => ({ ...p, data_vencimento: calculo.cronograma[i]?.data_vencimento || p.data_vencimento, data_registo: registo })),
+      historico: [...(e.historico || []), { data: new Date().toISOString(), accao: `Datas corrigidas: registo ${formatarData(data_registo)}, início ${formatarData(data_inicio)}`, por: utilizador?.nome || "Sistema" }],
     };
   });
 };

@@ -156,11 +156,12 @@ const AgendaDetalhe = () => {
 };
 
 const ModalPagamento = ({ item, carteiras, onFechar, onOk }) => {
-  const [form, setForm] = useState({ valor: String(valorEmDivida(item) || item.valor_esperado), forma_pagamento: "Dinheiro", carteira_id: String(carteiras[0]?.id || ""), referencia_transacao: "", observacoes: "" });
+  const [form, setForm] = useState({ valor: String(valorEmDivida(item) || item.valor_esperado), data_pagamento: hojeIso(), forma_pagamento: "Dinheiro", carteira_id: String(carteiras[0]?.id || ""), referencia_transacao: "", observacoes: "" });
   return (
     <ModalFormulario icone={Wallet} titulo="Registar pagamento" onFechar={onFechar} accoes={<><button type="button" className="cli-btn ghost" onClick={onFechar}>Cancelar</button><button type="button" className="cli-btn-novo" onClick={() => onOk(form)}>Confirmar</button></>}>
       <div className="cli-grid">
         <Campo label="Valor (MT)"><input value={form.valor} onChange={(e) => setForm((a) => ({ ...a, valor: soMontante(e.target.value) }))} /></Campo>
+        <Campo label="Data do pagamento"><input type="date" max={hojeIso()} value={form.data_pagamento} onChange={(e) => setForm((a) => ({ ...a, data_pagamento: e.target.value }))} /></Campo>
         <Campo label="Forma"><MenuSuspenso valor={form.forma_pagamento} opcoes={FORMAS_PAGAMENTO.map((f) => ({ id: f, label: f }))} onChange={(v) => setForm((a) => ({ ...a, forma_pagamento: v }))} /></Campo>
         <Campo label="Carteira"><MenuSuspenso valor={form.carteira_id} opcoes={carteiras.map((c) => ({ id: String(c.id), label: `${c.nome} · ${formatarMT(c.saldo)}` }))} onChange={(v) => setForm((a) => ({ ...a, carteira_id: v }))} /></Campo>
         <Campo label="Referência"><input value={form.referencia_transacao} onChange={(e) => setForm((a) => ({ ...a, referencia_transacao: e.target.value }))} /></Campo>

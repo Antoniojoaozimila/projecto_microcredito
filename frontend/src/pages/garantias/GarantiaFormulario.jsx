@@ -38,6 +38,7 @@ const avalistaVazio = () => ({
 });
 
 const inicial = (loanId = "") => ({
+  data_registo: hojeIso(),
   loan_id: loanId,
   tipo_garantia: "",
   subtipo_garantia: "",
@@ -184,6 +185,9 @@ const GarantiaFormulario = () => {
                 valorDe={(e) => e.valor_emprestado}
                 vazio="Não há empréstimos pendentes ou activos."
               />
+            </Campo>
+            <Campo icon={CalendarDays} label="Data de registo *" erro={erros.data_registo}>
+              <input type="date" className="emp-data" max={hojeIso()} value={form.data_registo} onChange={(e) => set("data_registo", e.target.value)} />
             </Campo>
           </div>
           {emprestimo ? (

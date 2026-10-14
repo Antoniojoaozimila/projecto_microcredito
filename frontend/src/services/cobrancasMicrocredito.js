@@ -652,16 +652,17 @@ export const registarCobranca = (itemId, dados, utilizador) => {
   const emprestimo = obterEmprestimo(item.loan_id);
   if (!emprestimo) throw new Error("O empréstimo já não existe.");
   const valor = arredondar(Number(dados.valor));
+  const dia = dados.data_pagamento || hojeIso();
   const pagamento = registarPagamento({
     loan_id: item.loan_id,
     installment_id: item.installment_id,
     valor_pago: valor,
-    data_pagamento: hojeIso(),
+    data_pagamento: dia,
     hora_pagamento: horaActual(),
     forma_pagamento: dados.forma_pagamento,
     referencia_transacao: dados.referencia_transacao,
     carteira_id: dados.carteira_id,
-    tipo_pagamento: sugerirTipo(emprestimo, { installmentId: item.installment_id, valor, dataPagamento: hojeIso() }),
+    tipo_pagamento: sugerirTipo(emprestimo, { installmentId: item.installment_id, valor, dataPagamento: dia }),
     observacoes: `Cobrança ${agenda.codigo_agenda}${texto(dados.observacoes) ? ` · ${texto(dados.observacoes)}` : ""}`,
   }, utilizador);
   const cobrado = arredondar(Number(item.valor_cobrado || 0) + valor);
@@ -669,7 +670,7 @@ export const registarCobranca = (itemId, dados, utilizador) => {
     ...i,
     valor_cobrado: cobrado,
     status: cobrado >= i.valor_esperado - 0.005 || valorEmDivida(i) <= 0.005 ? "Cobrado" : "Parcialmente Cobrado",
-    data_cobranca: hojeIso(),
+    data_cobranca: dia,
     hora_cobranca: horaActual(),
     motivo_nao_cobro: null,
     observacoes: texto(dados.observacoes) || i.observacoes,

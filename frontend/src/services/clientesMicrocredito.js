@@ -75,7 +75,7 @@ export const guardarCliente = (dados, utilizador) => {
   const novo = {
     ...dados,
     id: crypto.randomUUID(),
-    data_registo: agora,
+    data_registo: dados.data_registo || agora,
     data_atualizacao: agora,
     criado_por: utilizador?.nome || "Sistema",
   };

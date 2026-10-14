@@ -13,7 +13,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import Svg, { Circle, Path } from "react-native-svg";
+import Svg, { Circle } from "react-native-svg";
 import { useSafeAreaInsets } from "../safeArea";
 import {
   IconeAlerta,
@@ -200,33 +200,6 @@ const FluxoSemanal = ({ valores }) => {
   );
 };
 
-const Espiral = ({ percentagem }) => {
-  const desenho = useRef(new Animated.Value(0)).current;
-  const [traco, setTraco] = useState(280);
-  useEffect(() => {
-    Animated.timing(desenho, { toValue: 1, duration: 1400, easing: Easing.out(Easing.cubic), useNativeDriver: false }).start();
-    const id = desenho.addListener(({ value }) => setTraco(280 * (1 - value * Math.min(1, percentagem))));
-    return () => desenho.removeListener(id);
-  }, [desenho, percentagem]);
-  const pontos = [];
-  for (let i = 0; i <= 90; i += 1) {
-    const t = i / 90;
-    const angulo = t * Math.PI * 5.2;
-    const raio = 6 + t * 44;
-    pontos.push(`${60 + Math.cos(angulo) * raio} ${60 + Math.sin(angulo) * raio}`);
-  }
-  return (
-    <View style={styles.espiralCaixa}>
-      <Svg width={140} height={140} viewBox="0 0 120 120">
-        <Path d={`M ${pontos.join(" L ")}`} stroke="#e7eee9" strokeWidth="7" fill="none" strokeLinecap="round" />
-        <Path d={`M ${pontos.join(" L ")}`} stroke="#0f7a3c" strokeWidth="7" fill="none" strokeLinecap="round" strokeDasharray="280" strokeDashoffset={traco} />
-      </Svg>
-      <Text style={styles.espiralValor} numberOfLines={1}>{Math.round(percentagem * 100)}%</Text>
-      <Text style={styles.espiralNota} numberOfLines={1}>Cobrança</Text>
-    </View>
-  );
-};
-
 const Pizza = ({ fatias }) => {
   const estilo = entrar(180);
   const raio = 42;
@@ -343,12 +316,17 @@ const Sistema = ({ usuario, onSair, vista, item, onVista, onItem }) => {
 
   useEffect(() => {
     let vivo = true;
-    carregarConsulta().then((resultado) => {
-      if (!vivo) return;
-      setAvisos(resultado?.avisos || []);
-    });
+    const puxar = () => {
+      carregarConsulta().then((resultado) => {
+        if (!vivo) return;
+        setAvisos(resultado?.avisos || []);
+      });
+    };
+    puxar();
+    const intervalo = setInterval(puxar, 30000);
     return () => {
       vivo = false;
+      clearInterval(intervalo);
     };
   }, []);
 
@@ -613,7 +591,6 @@ const Sistema = ({ usuario, onSair, vista, item, onVista, onItem }) => {
     if (Number.isNaN(data.getTime())) return;
     fluxoSemana[(data.getDay() + 6) % 7] += Number(pagamento.valor) || 0;
   });
-  const taxaCobranca = recebido / Math.max(1, recebido + saldoEmprestimos);
   const nomesMes = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
   const agora = new Date();
   const mesesBarras = Array.from({ length: 6 }, (_, indice) => {
@@ -799,11 +776,6 @@ const Sistema = ({ usuario, onSair, vista, item, onVista, onItem }) => {
             <View style={styles.bloco}>
               <TituloBloco Icone={IconeGrafico} texto="Fluxo semanal" />
               <FluxoSemanal valores={fluxoSemana} />
-            </View>
-
-            <View style={styles.bloco}>
-              <TituloBloco Icone={IconeEscudo} texto="Espiral de cobrança" />
-              <Espiral percentagem={taxaCobranca} />
             </View>
 
             <View style={styles.bloco}>
@@ -1235,9 +1207,6 @@ const styles = StyleSheet.create({
   orcamentoRotulo: { fontFamily: fonte, color: "#8d9390", fontSize: 12, fontWeight: "700" },
   orcamentoValor: { fontFamily: fonte, color: cores.titulo, fontSize: 16, fontWeight: "800" },
   barraSemana: { width: "70%", alignSelf: "center", backgroundColor: "#1d4ed8", borderRadius: 8 },
-  espiralCaixa: { alignItems: "center", justifyContent: "center", position: "relative", minHeight: 150 },
-  espiralValor: { position: "absolute", top: 58, fontFamily: fonte, color: "#0f7a3c", fontWeight: "800", fontSize: 18 },
-  espiralNota: { marginTop: -8, fontFamily: fonte, color: "#8d9390", fontSize: 12, fontWeight: "700" },
   perfilPagina: { paddingBottom: 28 },
   perfilFaixa: { backgroundColor: "#5b21b6", overflow: "hidden", minHeight: 150, paddingHorizontal: 18, paddingTop: 12, paddingBottom: 28 },
   perfilCorte: { position: "absolute", width: 180, height: 90, right: -30, top: -20, backgroundColor: "#c4b5fd", transform: [{ rotate: "24deg" }] },

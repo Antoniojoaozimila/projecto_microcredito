@@ -294,7 +294,7 @@ const RegistarPagamento = () => {
                 ) : null}
               </Campo>
               <Campo icon={CalendarDays} label="Data do pagamento *" erro={erros.data_pagamento}>
-                <input type="date" className="emp-data" min={dataMinimaPagamento()} max={hojeIso()} value={form.data_pagamento} onChange={(e) => set("data_pagamento", e.target.value)} />
+                <input type="date" className="emp-data" min={dataMinimaPagamento(emprestimo) || undefined} max={hojeIso()} value={form.data_pagamento} onChange={(e) => set("data_pagamento", e.target.value)} />
               </Campo>
               <Campo icon={Clock} label="Hora" erro={erros.hora_pagamento}>
                 <input type="time" className="emp-data" value={form.hora_pagamento} onChange={(e) => set("hora_pagamento", e.target.value)} />

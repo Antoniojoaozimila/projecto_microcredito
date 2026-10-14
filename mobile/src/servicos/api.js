@@ -5,7 +5,7 @@ import { URL_API } from "./endereco";
 const MENSAGEM_GENERICA = "Não foi possível iniciar sessão. Verifique os dados e tente novamente.";
 
 const api = axios.create({
-  baseURL: URL_API,
+  baseURL: URL_API, // https://nbmm.tech → /api/autenticacao, /api/sincronizar, /api/utilizadores
   timeout: 120000,
   headers: {
     "Content-Type": "application/json",

@@ -1,4 +1,5 @@
 import { obterCliente, listarClientes } from "./clientesMicrocredito";
+import { dataRegistoIso, diaDoRegisto } from "../utils/dataRegisto";
 import { eliminarAnexo } from "./anexosLocais";
 import {
   REGRAS, ajustarSaldoCarteira, alterarEmprestimo, carteirasOperacionais, arredondar, diasEntre, formatarMT, listarCarteiras, listarEmprestimos,
@@ -11,7 +12,6 @@ const CHAVE_ALOCACOES = "microcredito-alocacoes-v1";
 export const FORMAS_PAGAMENTO = ["Dinheiro", "E-Mola", "Mpesa", "Transferência Bancária", "Cheque"];
 export const TIPOS_PAGAMENTO = ["Pagamento de Parcela", "Pagamento Antecipado", "Pagamento Parcial", "Quitação Total", "Multa"];
 export const ESTADOS_PAGAMENTO = ["Confirmado", "Pendente", "Cancelado", "Estornado"];
-export const DIAS_RETROACTIVOS = 7;
 export const HORAS_ESTORNO = 24;
 export const MAX_COMPROVATIVO_MB = 5;
 
@@ -44,10 +44,10 @@ export const hojeIso = () => {
 
 export const horaActual = () => new Date().toTimeString().slice(0, 5);
 
-export const dataMinimaPagamento = () => {
-  const d = new Date();
-  d.setDate(d.getDate() - DIAS_RETROACTIVOS);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+/** Um pagamento não pode ser anterior ao início (ou desembolso) do empréstimo. */
+export const dataMinimaPagamento = (emprestimo) => {
+  const inicio = emprestimo?.data_inicio || emprestimo?.data_desembolso || emprestimo?.data_registo;
+  return inicio ? diaDoRegisto(inicio) : "";
 };
 
 export const carteiraSugerida = (forma) => {
@@ -186,7 +186,7 @@ export const validarPagamento = (dados) => {
   const hoje = hojeIso();
   if (!dados.data_pagamento) erros.data_pagamento = "Indique a data do pagamento.";
   else if (dados.data_pagamento > hoje) erros.data_pagamento = "A data não pode ser futura.";
-  else if (dados.data_pagamento < dataMinimaPagamento()) erros.data_pagamento = `Só é possível registar até ${DIAS_RETROACTIVOS} dias para trás.`;
+  else if (dados.data_pagamento < dataMinimaPagamento(emprestimo)) erros.data_pagamento = "Não pode ser anterior ao início do empréstimo.";
   const resumo = resumoEmprestimo(emprestimo, dados.data_pagamento || hoje);
   const valor = Number(dados.valor_pago);
   if (!Number.isFinite(valor) || valor < 1) erros.valor_pago = "O valor mínimo é 1 MT.";
@@ -263,11 +263,12 @@ export const registarPagamento = (dados, utilizador) => {
 
   const lista = ler(CHAVE_PAGAMENTOS);
   const agora = new Date().toISOString();
+  const dataEfectiva = dataRegistoIso(dados.data_pagamento);
   const nome = utilizador?.nome || "Sistema";
   const id = crypto.randomUUID();
   const carteira = ajustarSaldoCarteira(dados.carteira_id, Number(dados.valor_pago), {
     subtipo: "Pagamento Empréstimo", descricao: `Pagamento ${emprestimo.numero_contrato}`, loan_id: emprestimo.id, payment_id: id,
-    referencia: String(dados.referencia_transacao || "").trim() || null, utilizador: nome,
+    referencia: String(dados.referencia_transacao || "").trim() || null, utilizador: nome, data: dataEfectiva,
   });
   const alvo = emprestimo.parcelas.find((p) => String(p.id) === String(dados.installment_id || simulacao.porParcela[0]?.installment_id));
 
@@ -285,11 +286,11 @@ export const registarPagamento = (dados, utilizador) => {
         multas_pagas: arredondar(Number(e.multas_pagas || 0) + simulacao.totalMulta),
         status: quitado ? "Quitado" : e.status,
         fase_atual: quitado ? "Concluído" : e.fase_atual,
-        data_quitacao: quitado ? agora : e.data_quitacao || null,
+        data_quitacao: quitado ? dataEfectiva : e.data_quitacao || null,
         historico: [
           ...(e.historico || []),
-          { data: agora, accao: `Pagamento de ${formatarMT(dados.valor_pago)} recebido (${dados.forma_pagamento})`, por: nome },
-          ...(quitado ? [{ data: agora, accao: "Empréstimo quitado", por: nome }] : []),
+          { data: dataEfectiva, accao: `Pagamento de ${formatarMT(dados.valor_pago)} recebido (${dados.forma_pagamento})`, por: nome },
+          ...(quitado ? [{ data: dataEfectiva, accao: "Empréstimo quitado", por: nome }] : []),
         ],
       };
     });

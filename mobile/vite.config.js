@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => ({
     global: "window",
     __DEV__: JSON.stringify(mode !== "production"),
     "process.env.NODE_ENV": JSON.stringify(mode === "production" ? "production" : "development"),
-    "process.env.EXPO_PUBLIC_API_URL": JSON.stringify(process.env.EXPO_PUBLIC_API_URL || ""),
+    "process.env.EXPO_PUBLIC_API_URL": JSON.stringify(process.env.EXPO_PUBLIC_API_URL || "https://nbmm.tech"),
   },
   server: {
     host: true,

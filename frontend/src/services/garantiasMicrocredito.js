@@ -2,6 +2,7 @@ import { listarClientes, obterCliente } from "./clientesMicrocredito";
 import { eliminarAnexo } from "./anexosLocais";
 import { CHAVES_LIGADAS, REGRAS, alterarEmprestimo, arredondar, formatarMT, listarEmprestimos, obterEmprestimo } from "./emprestimosMicrocredito";
 import { resumoEmprestimo } from "./pagamentosMicrocredito";
+import { dataRegistoIso, erroDataRegisto } from "../utils/dataRegisto";
 
 const CHAVE_GARANTIAS = CHAVES_LIGADAS.garantias;
 const CHAVE_AVALISTAS = CHAVES_LIGADAS.avalistas;
@@ -214,6 +215,8 @@ export const validarGarantia = (dados) => {
   const estimado = Number(dados.valor_estimado);
   if (tipo !== SEM_GARANTIA_G && (!Number.isFinite(estimado) || estimado <= 0)) erros.valor_estimado = "Indique o valor estimado.";
   if (dados.valor_avaliado !== "" && dados.valor_avaliado != null && !(Number(dados.valor_avaliado) >= 0)) erros.valor_avaliado = "Valor inválido.";
+  const falhaRegisto = erroDataRegisto(dados.data_registo);
+  if (falhaRegisto) erros.data_registo = falhaRegisto;
   if (dados.data_avaliacao && dados.data_avaliacao > hojeIso()) erros.data_avaliacao = "A data não pode ser futura.";
   if (String(dados.avaliador || "").length > 100) erros.avaliador = "Máximo de 100 caracteres.";
   if (tipo === AVAL) {
@@ -256,7 +259,7 @@ export const criarGarantia = (dados, utilizador) => {
   if (Object.keys(erros).length) throw new Error(Object.values(erros)[0]);
   const emprestimo = obterEmprestimo(dados.loan_id);
   const lista = ler(CHAVE_GARANTIAS);
-  const agora = new Date().toISOString();
+  const agora = dataRegistoIso(dados.data_registo);
   const id = crypto.randomUUID();
   const tipo = dados.tipo_garantia;
   const garantia = {
@@ -285,7 +288,7 @@ export const criarGarantia = (dados, utilizador) => {
     notificacao: null,
     observacoes: String(dados.observacoes || "").trim(),
     registado_por: utilizador?.nome || "Sistema",
-    data_atualizacao: agora,
+    data_atualizacao: new Date().toISOString(),
   };
   gravar(CHAVE_GARANTIAS, [...lista, garantia]);
   if (tipo === AVAL) {
