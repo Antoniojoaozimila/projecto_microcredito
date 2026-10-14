@@ -4,16 +4,11 @@ const ePedidoWeb = (req) => {
 };
 
 export const validarRecaptcha = async (req) => {
+  const secret = String(process.env.RECAPTCHA_SECRET || "").trim();
+  if (!secret) return "";
   if (!ePedidoWeb(req)) return "";
   const token = String(req.body?.recaptchaToken || "").trim();
   if (!token) return "Marque a caixa “Não sou um robô” antes de entrar.";
-  const secret = String(process.env.RECAPTCHA_SECRET || "").trim();
-  if (!secret) {
-    if (process.env.NODE_ENV === "production") {
-      console.warn("RECAPTCHA_SECRET em falta: o login web exige o token, mas o Google não o valida.");
-    }
-    return "";
-  }
   try {
     const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "";
     const corpo = new URLSearchParams({ secret, response: token });

@@ -28,8 +28,7 @@ import {
 import "./Login.css";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LefTLstAAAAANiDhBTqkaqP9jTXAyhV0T4VdP0D";
-const hostname = typeof window !== "undefined" ? window.location.hostname : "";
-const RECAPTCHA_ENABLED = import.meta.env.PROD || /nbmm\.tech$/i.test(hostname);
+const RECAPTCHA_ENABLED = false;
 const REMEMBER_KEY = "microcredito-remember-email";
 
 const LoginBubbles = ({ variant }) => {
