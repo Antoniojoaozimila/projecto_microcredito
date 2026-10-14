@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { encerrarSessaoExpirada, tokenEstaValido } from "../../utils/sessaoToken";
 
 const ProtectedRoute = ({
   children,
@@ -9,7 +10,8 @@ const ProtectedRoute = ({
 }) => {
   const { usuario } = useContext(AuthContext);
 
-  if (!usuario) {
+  if (!usuario || !tokenEstaValido(usuario.token || localStorage.getItem("token"))) {
+    encerrarSessaoExpirada();
     return <Navigate to="/microcredito/login" replace />;
   }
 

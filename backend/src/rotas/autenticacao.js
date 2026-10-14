@@ -5,6 +5,7 @@ import { Op } from "sequelize";
 import { Utilizador } from "../modelos/utilizador.js";
 import { autenticar } from "../middleware/autenticacao.js";
 import { lerPolitica, minutosSessao, validarSenhaPolitica } from "../servicos/politica.js";
+import { validarRecaptcha } from "../servicos/recaptcha.js";
 
 const router = Router();
 const segredo = () => process.env.JWT_SEGREDO || "microcredito-local-segredo-2026";
@@ -20,6 +21,8 @@ router.post("/entrar", async (req, res) => {
   const identificador = String(req.body?.nome || req.body?.utilizador || "").trim();
   const senha = String(req.body?.senha || "");
   if (!identificador || !senha) return res.status(400).json({ mensagem: "Indique o utilizador e a senha." });
+  const falhaCaptcha = await validarRecaptcha(req);
+  if (falhaCaptcha) return res.status(400).json({ mensagem: falhaCaptcha });
   const utilizador = await Utilizador.findOne({
     where: {
       [Op.or]: [{ nome_utilizador: identificador }, { nome: identificador }, { email: identificador }],

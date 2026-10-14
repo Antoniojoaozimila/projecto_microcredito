@@ -59,7 +59,7 @@ export const PADRAO_CONFIG = {
   expiracao_senha_dias: 90,
   max_tentativas_login: 5,
   bloqueio_minutos: 30,
-  sessao_expiracao_min: 60,
+  sessao_expiracao_min: 300,
   two_factor_obrigatorio: false,
   log_auditoria_ativo: true,
   backup_automatico: true,
@@ -92,7 +92,10 @@ const nomeDe = (u) => u?.nome || "Sistema";
 
 export const lerConfig = () => {
   try {
-    return { ...PADRAO_CONFIG, ...(JSON.parse(localStorage.getItem(CHAVE_CONFIG) || "null") || {}) };
+    const guardada = JSON.parse(localStorage.getItem(CHAVE_CONFIG) || "null") || {};
+    const config = { ...PADRAO_CONFIG, ...guardada };
+    if (Number(config.sessao_expiracao_min) === 60) config.sessao_expiracao_min = 300;
+    return config;
   } catch {
     return { ...PADRAO_CONFIG };
   }

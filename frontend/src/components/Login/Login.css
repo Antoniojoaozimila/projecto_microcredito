@@ -188,6 +188,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  overflow: visible;
 }
 
 .login-hp {
@@ -404,6 +405,8 @@
 }
 
 .login-recaptcha {
+  position: relative;
+  z-index: 6;
   display: flex;
   flex-direction: column;
   align-items: center;

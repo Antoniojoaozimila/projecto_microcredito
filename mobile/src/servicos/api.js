@@ -1,6 +1,7 @@
 import axios from "axios";
 import { lerItem } from "./armazenamento";
 import { URL_API } from "./endereco";
+import { encerrarSessaoExpirada, tokenEstaValido } from "./sessao";
 
 const MENSAGEM_GENERICA = "Não foi possível iniciar sessão. Verifique os dados e tente novamente.";
 
@@ -16,13 +17,25 @@ const api = axios.create({
 api.interceptors.request.use(async (config) => {
   try {
     const token = await lerItem("token");
+    if (token && !tokenEstaValido(token)) {
+      await encerrarSessaoExpirada();
+      return Promise.reject(new Error("A sessão expirou. Faça login novamente."));
+    }
     if (token) config.headers.Authorization = `Bearer ${token}`;
-  } catch {
-    /* o pedido segue mesmo sem sessão guardada */
+  } catch (erro) {
+    if (erro?.message?.includes("expirou")) return Promise.reject(erro);
   }
   config.headers["ngrok-skip-browser-warning"] = "true";
   return config;
 });
+
+api.interceptors.response.use(
+  (resposta) => resposta,
+  async (erro) => {
+    if (erro.response?.status === 401) await encerrarSessaoExpirada();
+    return Promise.reject(erro);
+  }
+);
 
 const cabecalhos = {
   Accept: "application/json",

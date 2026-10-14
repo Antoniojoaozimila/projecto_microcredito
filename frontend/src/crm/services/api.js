@@ -1,4 +1,5 @@
 ﻿import axios from 'axios';
+import { encerrarSessaoExpirada } from "../../utils/sessaoToken";
 
 // URL do backend — desenvolvimento: localhost | produção: portal-imp
 const API_BASE_URL = import.meta.env.VITE_CRM_API_URL || '/api/';
@@ -47,8 +48,8 @@ api.interceptors.response.use(
       console.error('❌ [API] Erro ao configurar requisição:', error.message);
     }
 
-    if (error.response?.status === 401) {
-      console.warn("[CRM API] Sessão inválida no serviço de cotações.");
+    if (error.response?.status === 401 && localStorage.getItem("token")) {
+      encerrarSessaoExpirada();
     }
     return Promise.reject(error);
   }

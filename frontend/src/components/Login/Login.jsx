@@ -27,10 +27,9 @@ import {
 } from "../../utils/loginSecurity";
 import "./Login.css";
 
-// Desativado temporariamente: a chave só é válida no domínio registado no Google.
-// Voltar a colocar em `true` depois de configurar o domínio.
-const RECAPTCHA_ENABLED = false;
-const RECAPTCHA_SITE_KEY = "6LefTLstAAAAANiDhBTqkaqP9jTXAyhV0T4VdP0D";
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LefTLstAAAAANiDhBTqkaqP9jTXAyhV0T4VdP0D";
+const hostname = typeof window !== "undefined" ? window.location.hostname : "";
+const RECAPTCHA_ENABLED = import.meta.env.PROD || /nbmm\.tech$/i.test(hostname);
 const REMEMBER_KEY = "microcredito-remember-email";
 
 const LoginBubbles = ({ variant }) => {
@@ -91,6 +90,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const [recaptchaError, setRecaptchaError] = useState(false);
+  const [recaptchaCompacto, setRecaptchaCompacto] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [formError, setFormError] = useState("");
   const [lockMs, setLockMs] = useState(() => getLockRemainingMs());
@@ -101,6 +101,14 @@ const Login = () => {
 
   useEffect(() => {
     carregarMarcaPublica();
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 420px)");
+    const sync = () => setRecaptchaCompacto(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
 
   useEffect(() => {
@@ -394,6 +402,7 @@ const Login = () => {
                   <ReCAPTCHA
                     ref={recaptchaRef}
                     sitekey={RECAPTCHA_SITE_KEY}
+                    size={recaptchaCompacto ? "compact" : "normal"}
                     hl="pt"
                     isolated
                     onChange={(token) => {

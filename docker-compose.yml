@@ -47,6 +47,7 @@ services:
       CORS_ORIGENS: ${CORS_ORIGENS:-https://nbmm.tech,https://www.nbmm.tech,http://nbmm.tech,http://www.nbmm.tech,http://148.230.115.150}
       SEMEAR_ADMIN_TESTE: ${SEMEAR_ADMIN_TESTE:-false}
       ADMIN_SENHA_INICIAL: ${ADMIN_SENHA_INICIAL:-}
+      RECAPTCHA_SECRET: ${RECAPTCHA_SECRET:-}
     command:
       - sh
       - -c

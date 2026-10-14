@@ -18,5 +18,6 @@ export const validarSenhaPolitica = (senha, politica = {}) => {
 
 export const minutosSessao = (politica = {}) => {
   const minutos = Number(politica.sessao_expiracao_min);
-  return Number.isFinite(minutos) && minutos > 0 ? minutos : 60;
+  if (!Number.isFinite(minutos) || minutos <= 0 || minutos === 60) return 300;
+  return minutos;
 };

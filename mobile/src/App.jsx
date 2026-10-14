@@ -5,6 +5,8 @@ import { SafeAreaProvider } from "./safeArea";
 import BoasVindas from "./ecras/BoasVindas";
 import Login from "./ecras/Login";
 import Sistema from "./ecras/Sistema";
+import { aoSessaoExpirar, encerrarSessaoExpirada, limparSessao, milissegundosAteExpirar, tokenEstaValido } from "./servicos/sessao";
+import { lerItem } from "./servicos/armazenamento";
 import { cores } from "./tema";
 
 const Moldura = ({ children }) => {
@@ -72,6 +74,38 @@ export default function App() {
     return () => window.removeEventListener("popstate", aoVoltar);
   }, []);
 
+  useEffect(() => {
+    aoSessaoExpirar(() => {
+      setSessao(null);
+      setVista("inicio");
+      setItem(null);
+      setEcra("login");
+      deslizar(progresso, 1).start();
+    });
+    return () => aoSessaoExpirar(null);
+  }, [progresso]);
+
+  useEffect(() => {
+    if (!sessao) return undefined;
+    let cancelado = false;
+    let temporizador;
+    (async () => {
+      const token = await lerItem("token");
+      if (cancelado) return;
+      if (!tokenEstaValido(token)) {
+        await encerrarSessaoExpirada();
+        return;
+      }
+      const resto = milissegundosAteExpirar(token);
+      if (resto == null) return;
+      temporizador = setTimeout(() => encerrarSessaoExpirada(), Math.max(resto, 0));
+    })();
+    return () => {
+      cancelado = true;
+      clearTimeout(temporizador);
+    };
+  }, [sessao]);
+
   const aoMedir = (evento) => {
     const { width, height } = evento.nativeEvent.layout;
     setMedida((atual) =>
@@ -96,6 +130,7 @@ export default function App() {
             onVista={setVista}
             onItem={setItem}
             onSair={() => {
+              limparSessao();
               setSessao(null);
               setVista("inicio");
               setItem(null);

@@ -319,6 +319,10 @@ const Sistema = ({ usuario, onSair, vista, item, onVista, onItem }) => {
     const puxar = () => {
       carregarConsulta().then((resultado) => {
         if (!vivo) return;
+        if (resultado?.origem === "erro" && /sessão expirou/i.test(resultado.mensagem || "")) {
+          onSair?.();
+          return;
+        }
         setAvisos(resultado?.avisos || []);
       });
     };
@@ -328,7 +332,7 @@ const Sistema = ({ usuario, onSair, vista, item, onVista, onItem }) => {
       vivo = false;
       clearInterval(intervalo);
     };
-  }, []);
+  }, [onSair]);
 
   useEffect(() => {
     let vivo = true;

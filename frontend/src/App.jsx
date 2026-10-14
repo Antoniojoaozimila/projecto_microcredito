@@ -1,8 +1,9 @@
 // src/App.jsx
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { encerrarSessaoExpirada, tokenEstaValido } from "./utils/sessaoToken";
 
 import Login from "./components/Login/Login";
 import Dashboard from "./pages/Dashboard";
@@ -91,12 +92,17 @@ function RedirecionarRotaAntiga() {
 
 function AppRoutes() {
   const { usuario, carregando } = useContext(AuthContext);
+  const sessaoActiva = Boolean(usuario && tokenEstaValido(usuario.token || localStorage.getItem("token")));
+
+  useEffect(() => {
+    if (usuario && !sessaoActiva) encerrarSessaoExpirada();
+  }, [usuario, sessaoActiva]);
 
   if (carregando) return <p>Carregando...</p>;
 
   return (
     <Routes>
-      {usuario ? (
+      {sessaoActiva ? (
         <>
           <Route path="/microcredito/dashboard" element={<Dashboard />}>
             <Route path="home" element={<Home />} />

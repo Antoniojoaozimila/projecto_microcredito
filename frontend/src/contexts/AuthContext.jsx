@@ -3,8 +3,26 @@ import { createContext, useState, useEffect, useCallback } from "react";
 import api from "../services/api";
 import { isDemoAdminLogin, buildDemoAdminSession } from "../constants/demoAdmin";
 import { hidratarDoServidor } from "../services/ponteServidor";
+import { guardarConfig, lerConfig } from "../services/configuracoesMicrocredito";
+import {
+  encerrarSessaoExpirada,
+  EVENTO_SESSAO_EXPIRADA,
+  milissegundosAteExpirar,
+  tokenEstaValido,
+} from "../utils/sessaoToken";
 
 const STORAGE_PROFILE = "userProfile";
+
+const alinharDuracaoSessao = () => {
+  try {
+    const guardada = JSON.parse(localStorage.getItem("microcredito-config-v1") || "null") || {};
+    if (Number(guardada.sessao_expiracao_min) === 60) {
+      guardarConfig({ sessao_expiracao_min: lerConfig().sessao_expiracao_min });
+    }
+  } catch {
+    /* a sessão segue com o valor por omissão de 5 horas */
+  }
+};
 
 export const AuthContext = createContext();
 
@@ -30,16 +48,47 @@ export const AuthProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
   const [carregando, setCarregando] = useState(true);
 
+  const logout = useCallback(() => {
+    localStorage.removeItem("token");
+    saveProfile(null);
+    setUsuario(null);
+    delete api.defaults.headers.common["Authorization"];
+  }, []);
+
+  useEffect(() => {
+    const aoExpirar = () => setUsuario(null);
+    window.addEventListener(EVENTO_SESSAO_EXPIRADA, aoExpirar);
+    return () => window.removeEventListener(EVENTO_SESSAO_EXPIRADA, aoExpirar);
+  }, []);
+
+  useEffect(() => {
+    if (!usuario?.token) return undefined;
+    const resto = milissegundosAteExpirar(usuario.token);
+    if (resto == null) return undefined;
+    if (resto <= 0) {
+      encerrarSessaoExpirada();
+      return undefined;
+    }
+    const temporizador = setTimeout(() => encerrarSessaoExpirada(), resto);
+    return () => clearTimeout(temporizador);
+  }, [usuario?.token]);
+
   useEffect(() => {
     let activo = true;
     (async () => {
       const token = localStorage.getItem("token");
       const profile = loadProfile();
+      if (token && !tokenEstaValido(token)) {
+        encerrarSessaoExpirada();
+        if (activo) setCarregando(false);
+        return;
+      }
       if (token) {
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         if (!String(token).startsWith("demo-")) {
           try {
             await hidratarDoServidor();
+            alinharDuracaoSessao();
           } catch {
             /* sem resposta do servidor os ecrãs ficam vazios até a base voltar */
           }
@@ -93,6 +142,7 @@ export const AuthProvider = ({ children }) => {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
       await hidratarDoServidor();
+      alinharDuracaoSessao();
     } catch {
       /* a sessão fica válida; os ecrãs voltam a pedir os dados */
     }
@@ -127,13 +177,6 @@ export const AuthProvider = ({ children }) => {
       return next;
     });
   }, []);
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    saveProfile(null);
-    setUsuario(null);
-    delete api.defaults.headers.common["Authorization"];
-  };
 
   return (
     <AuthContext.Provider value={{ usuario, carregando, login, logout, updateUser }}>

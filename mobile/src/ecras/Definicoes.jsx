@@ -246,7 +246,7 @@ const Definicoes = ({ definicao, onVoltar, onAbrir }) => {
     expiracao_senha_dias: "90",
     max_tentativas_login: "5",
     bloqueio_minutos: "30",
-    sessao_expiracao_min: "60",
+    sessao_expiracao_min: "300",
     backup_frequencia: "Diário",
     backup_hora: "02:00",
     requer_maiuscula: true,

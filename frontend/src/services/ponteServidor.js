@@ -1,5 +1,6 @@
 import api from "./api";
 import { aplicarMarca, CHAVE_MARCA, EVENTO_MARCA } from "./marcaSistema";
+import { encerrarSessaoExpirada, tokenEstaValido } from "../utils/sessaoToken";
 
 const memoria = new Map();
 let aHidratar = false;
@@ -29,7 +30,7 @@ limparArmazenamentoLocal();
 
 const tokenActual = () => {
   const token = original.getItem("token");
-  if (!token || String(token).startsWith("demo-")) return "";
+  if (!tokenEstaValido(token) || String(token).startsWith("demo-")) return "";
   return token;
 };
 
@@ -62,6 +63,10 @@ localStorage.getItem = (chave) => {
 
 localStorage.setItem = (chave, valor) => {
   if (eColecao(chave)) {
+    if (!tokenEstaValido(original.getItem("token"))) {
+      encerrarSessaoExpirada();
+      throw new Error("A sessão expirou. Faça login novamente.");
+    }
     const texto = String(valor);
     memoria.set(chave, texto);
     agendarEnvio(chave, texto);
